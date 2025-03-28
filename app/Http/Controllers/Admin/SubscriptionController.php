@@ -31,6 +31,7 @@ class SubscriptionController extends Controller
                 'duration_days' => 'required|integer|min:1',
                 'price' => 'required|numeric|min:0',
                 'goal' => 'required|string|max:255',
+                'image_url' => 'nullable|url',
                 'active' => 'boolean',
             ]);
 
@@ -60,11 +61,12 @@ class SubscriptionController extends Controller
             $subscription = Subscription::findOrFail($id);
 
             $validated = $request->validate([
-                'name' => 'sometimes|required|string|max:255',
+                'name' => 'required|string|max:255',
                 'description' => 'nullable|string',
-                'duration_days' => 'sometimes|required|integer|min:1',
-                'price' => 'sometimes|required|numeric|min:0',
-                'goal' => 'sometimes|required|string|max:255',
+                'duration_days' => 'required|integer|min:1',
+                'price' => 'required|numeric|min:0',
+                'goal' => 'required|string|max:255',
+                'image_url' => 'nullable|url',
                 'active' => 'boolean',
             ]);
 

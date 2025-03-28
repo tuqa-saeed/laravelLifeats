@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('duration_days');
             $table->decimal('price', 10, 2);
             $table->string('goal');
+            $table->string('image_url')->nullable(); // New column for subscription images
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

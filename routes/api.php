@@ -50,13 +50,13 @@ Route::apiResource('admin/meal-schedules', MealScheduleController::class)->only(
 Route::apiResource('admin/payments', PaymentController::class)->only(['index', 'show']);
 
 
+// ------------------------------------------------------------
+// Saheb – User Subsicription controls (User Side)
 
-    Route::get('/subscriptions', [ App\Http\Controllers\SubscriptionController::class, 'index']);
-    Route::post('/subscribe', [ App\Http\Controllers\SubscriptionController::class, 'subscribeToPlan']);
-    Route::get('/subscription-status', [ App\Http\Controllers\SubscriptionController::class, 'getSubscriptionStatus']);
-
-
-
+Route::get('/subscriptions', [ App\Http\Controllers\SubscriptionController::class, 'index']);
+Route::post('/subscribe', [ App\Http\Controllers\SubscriptionController::class, 'subscribeToPlan']);
+Route::get('/subscription-status', [ App\Http\Controllers\SubscriptionController::class, 'getSubscriptionStatus']);
+// ------------------------------------------------------------
 
 
 // ------------------------------------------------------------
