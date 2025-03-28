@@ -13,7 +13,7 @@ class PaymentsTableSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Payment::create([
-            'user_subscription_id' => 1, // must match created user_subscription
+            'user_subscription_id' => 1,
             'amount' => 499.99,
             'method' => 'manual',
             'payment_status' => 'paid',
