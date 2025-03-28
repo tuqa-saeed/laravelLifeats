@@ -13,8 +13,8 @@ class UserSubscriptionsTableSeeder extends Seeder
     public function run(): void
     {
         \App\Models\UserSubscription::create([
-            'user_id' => 1,
-            'subscription_id' => 1,
+            'user_id' => 1, // must match created user
+            'subscription_id' => 1, // must match subscription
             'start_date' => now(),
             'end_date' => now()->addDays(30),
             'status' => 'active',
