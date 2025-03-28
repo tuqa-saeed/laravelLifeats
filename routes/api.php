@@ -75,6 +75,7 @@ Route::get('/schedule/{userId}', [\App\Http\Controllers\MealScheduleController::
 
 // Meal Selection Routes (CRUD)
 Route::apiResource('meal-selections', \App\Http\Controllers\MealSelectionController::class);
+Route::post('/meal-selections/select/{userId}/{date}', [\App\Http\Controllers\MealSelectionController::class, 'selectMealForDate']);
 
 // ------------------------------------------------------------
 
