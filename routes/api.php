@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\MealSelectionController;
 use App\Http\Controllers\Admin\MealScheduleController;
 use App\Http\Controllers\Admin\PaymentController;
 
+
 // For TESTing purposes
 // --------------------------------------------------------------------
 // Route::apiResource('products', ProductsController::class);
@@ -48,6 +49,16 @@ Route::apiResource('admin/meal-schedules', MealScheduleController::class)->only(
 
 Route::apiResource('admin/payments', PaymentController::class)->only(['index', 'show']);
 
+
+
+    Route::get('/subscriptions', [ App\Http\Controllers\SubscriptionController::class, 'index']);
+    Route::post('/subscribe', [ App\Http\Controllers\SubscriptionController::class, 'subscribeToPlan']);
+    Route::get('/subscription-status', [ App\Http\Controllers\SubscriptionController::class, 'getSubscriptionStatus']);
+
+
+
+
+
 // ------------------------------------------------------------
 // Qutaiba – Meals & Schedule APIs (User Side)
 
@@ -66,3 +77,4 @@ Route::get('/schedule/{userId}', [\App\Http\Controllers\MealScheduleController::
 Route::apiResource('meal-selections', \App\Http\Controllers\MealSelectionController::class);
 
 // ------------------------------------------------------------
+
