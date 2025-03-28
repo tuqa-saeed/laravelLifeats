@@ -50,10 +50,31 @@ Route::apiResource('admin/meal-schedules', MealScheduleController::class)->only(
 Route::apiResource('admin/payments', PaymentController::class)->only(['index', 'show']);
 
 
+
     Route::get('/subscriptions', [ App\Http\Controllers\SubscriptionController::class, 'index']);
     Route::post('/subscribe', [ App\Http\Controllers\SubscriptionController::class, 'subscribeToPlan']);
     Route::get('/subscription-status', [ App\Http\Controllers\SubscriptionController::class, 'getSubscriptionStatus']);
 
 
 
+
+
+// ------------------------------------------------------------
+// Qutaiba – Meals & Schedule APIs (User Side)
+
+// Meal Category Routes (CRUD)
+Route::get('/meal-categories', [\App\Http\Controllers\MealCategoryController::class, 'getMealCategories']);
+
+// Meal Routes 
+Route::get('/meals/category/{id}', [\App\Http\Controllers\MealController::class, 'getMealsByCategory']);
+Route::get('/meals/date/{date}', [\App\Http\Controllers\MealController::class, 'getMealsByDate']);
+Route::apiResource('meals', \App\Http\Controllers\MealController::class);
+
+// Meal Schedule Routes
+Route::get('/schedule/{userId}', [\App\Http\Controllers\MealScheduleController::class, 'getSchedule']);
+
+// Meal Selection Routes (CRUD)
+Route::apiResource('meal-selections', \App\Http\Controllers\MealSelectionController::class);
+
+// ------------------------------------------------------------
 
