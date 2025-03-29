@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('carbs');
             $table->integer('fats');
             $table->string('image_url')->nullable();
+            $table->foreignId('subscription_id')->nullable()->constrained('subscriptions')->onDelete('set null');
             $table->foreignId('category_id')->nullable()->constrained('meal_categories')->onDelete('set null');
             $table->timestamps();
         });

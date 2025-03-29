@@ -12,13 +12,13 @@ class MealController extends Controller
     // GET /admin/meals
     public function index()
     {
-        return Meal::with('category')->get(); // eager load category if relation exists
+        return Meal::with(['category', 'subscriptions'])->get(); // eager load category if relation exists
     }
 
     // GET /admin/meals/{id}
     public function show($id)
     {
-        $meal = Meal::with('category')->findOrFail($id);
+        $meal = Meal::with(['category', 'subscriptions'])->findOrFail($id);
         return response()->json($meal);
     }
 
@@ -27,15 +27,17 @@ class MealController extends Controller
     {
         try {
             $validated = $request->validate([
-                'name' => 'required|string|max:255',
+                'name' => 'sometimes|required|string|max:255',
                 'description' => 'nullable|string',
-                'calories' => 'required|integer|min:0',
-                'protein' => 'required|integer|min:0',
-                'carbs' => 'required|integer|min:0',
-                'fats' => 'required|integer|min:0',
+                'calories' => 'sometimes|required|integer|min:0',
+                'protein' => 'sometimes|required|integer|min:0',
+                'carbs' => 'sometimes|required|integer|min:0',
+                'fats' => 'sometimes|required|integer|min:0',
                 'image_url' => 'nullable|url',
                 'category_id' => 'nullable|exists:meal_categories,id',
+                'subscription_id' => 'nullable|exists:subscriptions,id', // ✅ added this
             ]);
+
 
             $meal = Meal::create($validated);
 
@@ -71,7 +73,9 @@ class MealController extends Controller
                 'fats' => 'sometimes|required|integer|min:0',
                 'image_url' => 'nullable|url',
                 'category_id' => 'nullable|exists:meal_categories,id',
+                'subscription_id' => 'nullable|exists:subscriptions,id', // ✅ added this
             ]);
+
 
             $meal->update($validated);
 

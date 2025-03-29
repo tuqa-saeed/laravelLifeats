@@ -19,10 +19,15 @@ class Meal extends Model
         'fats',
         'image_url',
         'category_id',
+        'subscription_id'
     ];
 
     public function category()
     {
         return $this->belongsTo(MealCategory::class, 'category_id');
+    }
+    public function subscriptions()
+    {
+        return $this->belongsTo(Subscription::class, 'subscription_id');
     }
 }
