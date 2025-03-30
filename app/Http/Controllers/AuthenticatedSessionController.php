@@ -4,9 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
+     /**
+     * Show the login form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showLoginForm()
+    {
+        return view('auth.login'); 
+    }
     /**
      * Handle an incoming authentication request.
      *
@@ -21,12 +31,15 @@ class AuthenticatedSessionController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            $user = Auth::user();
+            $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
                 'message' => 'Login successful',
-                'user' => Auth::user(),  
-            ], 200);        }
+                'user' => $user,
+                'token' => $token, // Return Sanctum token
+            ], 200);
+        }
 
         return response()->json(['message' => 'Invalid credentials'], 401);
     }
@@ -39,11 +52,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request)
     {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
+        $request->user()->tokens()->delete(); // Revoke all tokens
 
         return response()->json(['message' => 'Logout successful'], 200);
     }

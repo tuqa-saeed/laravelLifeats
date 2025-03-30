@@ -8,8 +8,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
+
 class RegisteredUserController extends Controller
 {
+    public function showRegistrationForm()
+    {
+        return view('auth.register'); 
+    }
     /**
      * Handle an incoming registration request.
      *
@@ -30,6 +35,11 @@ class RegisteredUserController extends Controller
             'preferences' => ['nullable', 'string'],  
             'allergies' => ['nullable', 'string'], 
         ]);
+        $role = $request->role ?? 'user';
+
+        if ($role === 'admin') {
+            $role = 'user';
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -37,10 +47,11 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'address' => $request->address,
-            'role' => $request->role ?? 'user',  
+            'role' => $role,  
             'preferences' => $request->preferences,
             'allergies' => $request->allergies,
         ]);
+       
 
         event(new Registered($user));
         return response()->json($user, 201);
