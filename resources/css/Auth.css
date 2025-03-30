@@ -1,0 +1,18 @@
+body {
+    background-color: #ffffff; 
+    color: #000000; 
+    font-family: 'Sans-serif', Arial, Helvetica, sans-serif; 
+}
+.btn-primary {
+    background-color: #ff691c; 
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #e65a19; 
+}
+.link-primary {
+    color: #ff691c; 
+}
+.link-primary:hover {
+    text-decoration: underline; 
+}

@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\RegisteredUserController;
+use App\Http\Controllers\AuthenticatedSessionController;
+use App\Http\Controllers\UserController;
+//use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\MealController;
 use App\Http\Controllers\Admin\SubscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -10,6 +13,22 @@ use App\Http\Controllers\Admin\UserSubscriptionController;
 use App\Http\Controllers\Admin\MealSelectionController;
 use App\Http\Controllers\Admin\MealScheduleController;
 use App\Http\Controllers\Admin\PaymentController;
+
+// Public routes for registration and login
+
+Route::post('/register', [RegisteredUserController::class, 'registerUser']);
+Route::post('/login', [AuthenticatedSessionController::class, 'loginUser']);
+
+// Logout route
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth:sanctum');
+// Sanctum protected routes
+Route::middleware('auth:sanctum')->group(function () {
+
+Route::put('/user', [UserController::class, 'updateUserProfile']);
+Route::get('/user', [UserController::class, 'getUserProfile']);
+
+});
+
 
 
 // For TESTing purposes
