@@ -6,11 +6,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function showProfile()
-    {
-        $user = Auth::user();
-        return view('auth.profile', compact('user')); 
-    }
     public function getUserProfile(Request $request)
     {
         return $request->user();
@@ -46,7 +41,6 @@ class UserController extends Controller
         return response()->json($user); 
     }
     
-
 
 
 }
