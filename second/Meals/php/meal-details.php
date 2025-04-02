@@ -21,8 +21,9 @@
     $durationOptions = [20];
     $discounts = [null];
     ?>
-    @include('front.Homepage.includes.navbar')
-
+    <?php
+    require_once __DIR__ . "/../../Homepage/includes/navbar.php";
+    ?>
     <div class="container">
         <div class="left-column">
             <div class="header">
@@ -136,7 +137,9 @@
             <a href="#" class="subscribe-button">Subscribe</a>
         </div>
     </div>
-    
+    <?php
+    require_once __DIR__ . "/../../Homepage/includes/footer.php";
+    ?>
     <script>
         // Load meal details from localStorage first
         function loadMealDetails() {

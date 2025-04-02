@@ -79,7 +79,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container p-0">
-            <a class="navbar-brand" href="resources/views/front/Homepage/index.php">
+            <a class="navbar-brand" href="/Homepage/index.php">
 
                 <img src="../../assets/logo3.ico" alt="" class="logo">
 

@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Our Meal Plans</title>
-  <link rel="stylesheet" href="/assets/css/QT/meal.css">
+  <link rel="stylesheet" href="../css/meal.css" />
   <style>
     .pagination-dots {
       display: flex;
