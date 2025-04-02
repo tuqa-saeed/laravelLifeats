@@ -21,9 +21,21 @@ Route::get('/get-session', function () {
     return response()->json(['session_data' => session()->all()]);
 }); */
 
-Route::get('/register', [RegisteredUserController::class, 'showRegistrationForm'])->name('register');
-Route::get('/login', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
+// Route::get('/register', [RegisteredUserController::class, 'showRegistrationForm'])->name('register');
+// Route::get('/login', [AuthenticatedSessionController::class, 'showLoginForm'])->name('login');
 
-Route::get('/profile', [UserProfileController::class, 'showProfile'])->name('profile')->middleware('auth');
+// Route::get('/profile', [UserProfileController::class, 'showProfile'])->name('profile')->middleware('auth');
+
+Route::get("/", function () {
+    return view('front.Homepage.index');
+});
+
+Route::get("/meals", function () {
+    return view('front.Meals.php.meal');
+});
+
+Route::get("/meal-details/{id}", function () {
+    return view('front.Meals.php.meal-details');
+});
 
 
