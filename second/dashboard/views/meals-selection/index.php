@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Admin Dashboard</title>
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Favicon -->
     <link rel="icon" href="assets/img/wrist-watch.ico" type="image/x-icon" />
@@ -31,8 +32,7 @@
             <!-- Main Content -->
             <div class="container">
                 <div class="page-inner">
-                    <h1>Products List</h1>
-                    <a href="index.php?controller=product&action=create" class="btn btn-primary my-2">Add New Product</a>
+                    <h1>Meals Selections List</h1>
                     <form action="index.php?controller=product&action=search" method="POST" class="form-inline my-2 d-flex">
                         <input type="text" name="keyword" class="form-control" placeholder="Search for products">
                         <button type="submit" class="btn btn-primary">Search</button>

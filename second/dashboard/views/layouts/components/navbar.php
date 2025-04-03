@@ -1,21 +1,3 @@
-<?php
-// $userid = $_SESSION['user_id'];
-// $username = $_SESSION['name'];
-
-// require_once "config/database.php";
-// $pdo = new Database();
-// $con = $pdo->getConnection();
-// $stmt = $con->prepare("SELECT * FROM users WHERE id = :userid");
-// $stmt->bindParam(':userid', $userid, PDO::PARAM_INT);
-// $stmt->execute();
-// $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-// if ($user) {
-//   $username = $user['name'];
-// }
-
-?>
-
 <nav class="navbar navbar-header navbar-header-transparent navbar-expand-lg border-bottom">
   <div class="container-fluid">
     <nav

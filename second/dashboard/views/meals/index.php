@@ -8,9 +8,10 @@
 
   <!-- Favicon -->
   <link rel="icon" href="assets/img/wrist-watch.ico" type="image/x-icon" />
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- Fonts and icons -->
   <?php require_once "views/layouts/components/fonts.html"; ?>
+
 </head>
 
 <body>
@@ -32,7 +33,7 @@
       <div class="container">
         <div class="page-inner">
           <h1>Meals List</h1>
-          <a href="index.php?controller=product&action=create" class="btn btn-primary my-2">Add New Product</a>
+          <a href="index.php?page=meals/create" class="btn btn-primary my-2">Add New Meal</a>
           <form action="index.php?controller=product&action=search" method="POST" class="form-inline my-2 d-flex">
             <input type="text" name="keyword" class="form-control" placeholder="Search for products">
             <button type="submit" class="btn btn-primary">Search</button>
