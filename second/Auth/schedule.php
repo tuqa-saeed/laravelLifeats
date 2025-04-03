@@ -33,9 +33,17 @@
     }
 
     .nav-tabs .nav-link {
-      color: #ff691c;
-      font-weight: 600;
+      min-width: 100px;
+      text-align: center;
+      padding: 10px;
     }
+
+    .nav-tabs .nav-link small {
+      font-size: 0.8rem;
+      display: block;
+      margin-top: 4px;
+    }
+
 
     .accordion-button {
       font-weight: 600;
@@ -206,7 +214,7 @@
           document.getElementById("scheduleTabContent").innerHTML = `
         <div class="alert alert-danger text-center">Error loading schedule.</div>
       `;
-          showModal("Error","You dont have an active Subsicribtion please subsicribe");
+          showModal("Error", "You dont have an active Subsicribtion please subsicribe");
         });
     }
   </script>

@@ -33,6 +33,8 @@ $routes = [
     "meal-schedules/index" => 'views/meal-schedules/index.php',
     "meal-schedules/show" => 'views/meal-schedules/show.php',
 
+    "delivery/index" => 'views/delivery/index.php',
+    "delivery/show" => 'views/delivery/show.php',
 ];
 
 

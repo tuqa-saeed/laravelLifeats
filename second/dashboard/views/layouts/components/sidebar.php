@@ -118,34 +118,9 @@
 
 
 
-        
-          <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#tables">
-              <i class="fas fa-user-cog"></i>
-              <p>Admins</p>
-              <span class="caret"></span>
-            </a>
-            <div class="collapse" id="tables">
-              <ul class="nav nav-collapse">
-                <li>
-                  <a href="index.php?controller=admin&action=index">
-                    <span class="sub-item">Admins Data</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="index.php?controller=admin&action=create">
-                    <span class="sub-item">Create new Admin</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </li>
-        <li class="nav-item">
-          <a href="index.php?controller=contact&action=index">
-            <i class="fas fa-address-book"></i>
-            <p>Contacts</p>
-          </a>
-        </li>
+
+
+
 
         <li class="nav-section">
           <span class="sidebar-mini-icon">
@@ -209,7 +184,29 @@
             </ul>
           </div>
         </li>
+        <li class="nav-section">
+          <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+          </span>
+          <h4 class="text-section">Delivery</h4>
+        </li>
 
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#delivery">
+            <i class="fas fa-calendar-alt"></i> <!-- New icon -->
+            <p>Delivery</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="delivery"> <!-- Fixed ID -->
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="index.php?page=delivery/index">
+                  <span class="sub-item">Delivery Schedules</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
       </ul>
     </div>
   </div>

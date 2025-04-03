@@ -165,7 +165,7 @@
           spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     }
-
+    
     document.getElementById('user-subscription-search-form').addEventListener('submit', function(e) {
       e.preventDefault(); // stop regular form submission
 

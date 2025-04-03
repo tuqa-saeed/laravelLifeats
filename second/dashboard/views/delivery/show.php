@@ -100,7 +100,7 @@
             const url = new URLSearchParams(window.location.search);
             return url.get(key);
         }
-        
+
         const scheduleId = getQueryParam('id');
 
         if (scheduleId) {
@@ -148,39 +148,57 @@
                     const container = document.getElementById('meal-selection-list');
                     container.innerHTML = '';
 
+                    // Check for selected meals
                     const hasCustomSelection = schedule.selections.some(sel => sel.selected === 1);
 
-                    const displayMeals = hasCustomSelection ?
-                        schedule.selections.filter(sel => sel.selected === 1) :
-                        schedule.selections;
+                    let displayMeals;
 
+                    if (hasCustomSelection) {
+                        // Show only selected meals
+                        displayMeals = schedule.selections.filter(sel => sel.selected === 1);
+                    } else {
+                        // No selected meals → Pick one per category
+                        const categoryMap = new Map();
+
+                        schedule.selections.forEach(sel => {
+                            const categoryId = sel.category_id;
+                            if (!categoryMap.has(categoryId)) {
+                                categoryMap.set(categoryId, sel); // take the first selection per category
+                            }
+                        });
+
+                        displayMeals = Array.from(categoryMap.values());
+                    }
+
+                    // Render meals
                     displayMeals.forEach(selection => {
                         const meal = selection.meal;
                         const card = document.createElement('div');
                         card.className = 'card mb-3';
 
                         card.innerHTML = `
-            <div class="row no-gutters">
-              <div class="col-md-3">
-                <img src="${meal.image_url}" class="img-fluid rounded-start" alt="${meal.name}">
-              </div>
-              <div class="col-md-9">
-                <div class="card-body">
-                  <h5 class="card-title">${meal.name}</h5>
-                  <p class="card-text">${meal.description}</p>
-                  <p class="card-text">
-                    <small>Calories: ${meal.calories} | Protein: ${meal.protein}g | Carbs: ${meal.carbs}g | Fats: ${meal.fats}g</small>
-                  </p>
-                  <span class="badge bg-${selection.selected === 1 ? 'success' : 'secondary'}">
-                    ${selection.selected === 1 ? 'Selected' : 'Default'}
-                  </span>
-                </div>
-              </div>
-            </div>
-          `;
+    <div class="row no-gutters">
+      <div class="col-md-3">
+        <img src="${meal.image_url}" class="img-fluid rounded-start" alt="${meal.name}">
+      </div>
+      <div class="col-md-9">
+        <div class="card-body">
+          <h5 class="card-title">${meal.name}</h5>
+          <p class="card-text">${meal.description}</p>
+          <p class="card-text">
+            <small>Calories: ${meal.calories} | Protein: ${meal.protein}g | Carbs: ${meal.carbs}g | Fats: ${meal.fats}g</small>
+          </p>
+          <span class="badge bg-${selection.selected === 1 ? 'success' : 'secondary'}">
+            ${selection.selected === 1 ? 'Selected' : 'Default'}
+          </span>
+        </div>
+      </div>
+    </div>
+  `;
 
                         container.appendChild(card);
                     });
+
                 })
                 .catch(err => {
                     console.error('Error loading schedule:', err);

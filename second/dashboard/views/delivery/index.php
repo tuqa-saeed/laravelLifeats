@@ -33,6 +33,10 @@
       <div class="container">
         <div class="page-inner">
           <h1>Meal Schedules</h1>
+          <button onclick="generateDeliveryPDF()" class="btn btn-danger">
+            <i class="fas fa-file-download"></i> Delivery PDF
+          </button>
+
 
           <table class="table table-striped">
             <thead class="table-dark">
@@ -40,7 +44,6 @@
                 <th>ID</th>
                 <th>Date</th>
                 <th>User</th>
-                <th>Subscription</th>
                 <th>Locked</th>
                 <th>Meals</th>
                 <th>Actions</th>
@@ -68,44 +71,58 @@
     document.addEventListener('DOMContentLoaded', () => {
       const spinnerOverlay = document.getElementById('spinner-overlay');
       spinnerOverlay.style.display = 'block';
+
       fetch('http://127.0.0.1:8000/api/admin/meal-schedules')
         .then(res => res.json())
         .then(data => {
+          console.log(data);
 
           const tbody = document.getElementById('meals-table-body');
           tbody.innerHTML = '';
 
-          data.forEach(schedule => {
-            const user = schedule.user_subscription.user;
-            const subscriptionName = schedule.user_subscription.subscription?.name || 'N/A';
-            const meals = schedule.selections.map(sel => sel.meal.name).join(', ');
+          // Get today's date in YYYY-MM-DD format
+          const today = new Date().toISOString().split('T')[0];
 
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-          <td>${schedule.id}</td>
-          <td>${schedule.date}</td>
-          <td>${user.name}</td>
-          <td>${subscriptionName}</td>
-          <td><span class="badge bg-${schedule.locked ? 'danger' : 'success'}">${schedule.locked ? 'Locked' : 'Unlocked'}</span></td>
-          <td>${meals}</td>
-          <td>
-            <a href="index.php?page=meal-schedules/show&id=${schedule.id}" class="btn btn-sm btn-info">
-              <i class="fas fa-eye"></i>
-            </a>
-          </td>
-        `;
+          // Filter schedules by today's date
+          const todaySchedules = data.filter(schedule => schedule.date === today);
 
-            tbody.appendChild(tr);
-          });
+          if (todaySchedules.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted">No meal schedules for today.</td></tr>`;
+          } else {
+            todaySchedules.forEach(schedule => {
+              const user = schedule.user_subscription.user;
+              const subscriptionName = schedule.user_subscription.subscription?.name || 'N/A';
+              const meals = schedule.selections.map(sel => sel.meal.name).join(', ');
+
+              const tr = document.createElement('tr');
+              tr.innerHTML = `
+              <td>${schedule.id}</td>
+              <td>${schedule.date}</td>
+              <td>${user.name}</td>
+              <td><span class="badge bg-${schedule.locked ? 'danger' : 'success'}">${schedule.locked ? 'Locked' : 'Unlocked'}</span></td>
+              <td>${meals}</td>
+              <td>
+                <a href="index.php?page=delivery/show&id=${schedule.id}" class="btn btn-sm btn-info">
+                  <i class="fas fa-eye"></i>
+                </a>
+              </td>
+            `;
+
+              tbody.appendChild(tr);
+            });
+          }
         })
         .catch(err => {
           console.error('Failed to load meal schedules:', err);
           document.getElementById('meals-table-body').innerHTML = '<tr><td colspan="7">Error loading data.</td></tr>';
-        }).finally(() => {
+        })
+        .finally(() => {
           spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     });
   </script>
+  <script src="services/orderReport/delivery.js"></script>
+
 </body>
 
 </html>
