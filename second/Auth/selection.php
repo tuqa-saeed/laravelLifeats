@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <title>Meal Selection</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <?php include '../assets/confirm.php'; ?>
+    <?php include '../assets/modal.php'; ?>
 </head>
 
 <body class="bg-light">
@@ -62,7 +66,7 @@
                 const schedules = await res.json();
 
                 if (res.status === 404) {
-                    document.getElementById("schedule-container").innerHTML = "No Subsicriptions Schedule found!"
+                    showModal("Error", "You dont have an active Subsicribtion please subsicribe");
                     return;
                 }
 
@@ -107,6 +111,7 @@
 
 
             } catch (error) {
+                showModal("Error", "Error fetching schedules or You arnot Subsicribed yet in a plan!")
                 console.error("Error fetching schedules:", error);
             }
         }
@@ -228,7 +233,7 @@
                     selected_meal_ids: selectedMealIds
                 };
                 console.log(payload);
-                
+
 
                 try {
                     const token = getCookie('token'); // Make sure getCookie is defined
@@ -322,6 +327,9 @@
     <?php
     require_once __DIR__ . "/../Homepage/includes/footer.php";
     ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Your global modal script -->
+    <script src="../assets/global-modal.js"></script>
 </body>
 
 </html>

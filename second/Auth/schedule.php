@@ -76,6 +76,8 @@
       padding: 0.25rem 0.5rem;
     }
   </style>
+  <?php include '../assets/confirm.php'; ?>
+  <?php include '../assets/modal.php'; ?>
 </head>
 
 <body>
@@ -204,12 +206,15 @@
           document.getElementById("scheduleTabContent").innerHTML = `
         <div class="alert alert-danger text-center">Error loading schedule.</div>
       `;
+          showModal("Error","You dont have an active Subsicribtion please subsicribe");
         });
     }
   </script>
 
   <!-- Bootstrap JS (for tabs & accordion) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Your global modal script -->
+  <script src="../assets/global-modal.js"></script>
 </body>
 
 </html>

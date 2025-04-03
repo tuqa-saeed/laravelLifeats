@@ -9,6 +9,75 @@
 
     <!-- Load Modal First -->
     <?php include '../../assets/modal.php'; ?>
+    <style>
+        #spinner-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1050;
+            display: none;
+            /* Default hidden */
+            justify-content: center;
+            align-items: center;
+            pointer-events: all;
+            background: transparent;
+        }
+
+        .spinner-backdrop {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+            z-index: 1;
+        }
+
+        .spinner-wrapper {
+            position: relative;
+            z-index: 2;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            left: 50%;
+            top: 50%;
+        }
+
+        .spinner-border {
+            width: 80px;
+            height: 80px;
+            border-width: 6px;
+            border-color: #ff691c transparent #ff691c transparent;
+            animation: spinner-rotate 1s linear infinite;
+            border-radius: 50%;
+        }
+
+        .spinner-icon {
+            position: absolute;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            background-color: #fff;
+            pointer-events: none;
+            object-fit: cover;
+        }
+
+        .text-orange {
+            color: #ff691c !important;
+        }
+
+        @keyframes spinner-rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
 </head>
 
 <body class="p-0 m-0">
@@ -123,10 +192,20 @@
             </form>
         </div>
     </div>
+    <div id="spinner-overlay">
+        <div class="spinner-backdrop"></div>
+        <div class="spinner-wrapper">
+            <div class="spinner-border text-orange" role="status"></div>
+            <img src="../../dashboard/views/layouts/components/logo3.ico" alt="Center Icon" class="spinner-icon" />
+        </div>
+    </div>
+
     <?php
     require_once __DIR__ . "/../../Homepage/includes/footer.php";
     ?>
     <script>
+        const spinnerOverlay = document.getElementById('spinner-overlay');
+        spinnerOverlay.style.display = 'none'; // Show spinner immediately
         // Helper to read cookie by name
         function getCookie(name) {
             const value = `; ${document.cookie}`;
@@ -174,6 +253,7 @@
                     showModal("Error", 'Missing authentication token.');
                     return;
                 }
+                spinnerOverlay.style.display = 'block'; // Show spinner immediately
 
                 const response = await fetch('http://127.0.0.1:8000/api/user-subscriptions/subscribe', {
                     method: 'POST',
@@ -191,15 +271,19 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    showModal("Error", `${data.message ||'Subscription successful and meals scheduled!'} `);
+                    spinnerOverlay.style.display = 'none'; // Show spinner immediately
+                    showModal("Done!", `${data.message ||'Subscription successful and meals scheduled!'} `);
 
                     console.log('Success:', data);
                     // Optional redirect or UI update
                 } else {
+                    spinnerOverlay.style.display = 'none'; // Show spinner immediately
+
                     showModal("Error", `${data.message || 'Subscription failed.'} `);
                     console.error('Error:', data);
                 }
             } catch (error) {
+                spinnerOverlay.style.display = 'none'; // Show spinner immediately
                 console.log('About to show modal');
                 console.log(typeof showModal, showModal);
                 showModal("Error", "An error occurred during subscription.");
@@ -243,6 +327,7 @@
 
     <!-- Your global modal script -->
     <script src="../../assets/global-modal.js"></script>
+
 
 </body>
 

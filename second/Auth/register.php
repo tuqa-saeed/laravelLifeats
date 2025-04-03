@@ -92,18 +92,19 @@
             color: #e85d17;
             text-decoration: underline;
         }
+
         #error {
-    /* تخصيص الأنماط باستخدام ID */
-    font-size: 1rem;
-}
+            /* تخصيص الأنماط باستخدام ID */
+            font-size: 1rem;
+        }
 
-.error {
-    /* تخصيص الأنماط باستخدام class */
-    color: red;
-}
-
-       
+        .error {
+            /* تخصيص الأنماط باستخدام class */
+            color: red;
+        }
     </style>
+    <?php include '../assets/confirm.php'; ?>
+    <?php include '../assets/modal.php'; ?>
 </head>
 
 <body>
@@ -141,9 +142,9 @@
 
                 </div>
                 <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" placeholder="Your address" required>
-                <div id="addressError" class="error"></div>
+                    <label for="address" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="address" placeholder="Your address" required>
+                    <div id="addressError" class="error"></div>
 
                 </div>
 
@@ -170,8 +171,8 @@
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
         function showError(elementId, message) {
-        const errorDiv = document.getElementById(elementId);
-        errorDiv.textContent = message;
+            const errorDiv = document.getElementById(elementId);
+            errorDiv.textContent = message;
         }
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -186,7 +187,7 @@
             const passwordConfirmation = document.getElementById('password_confirmation').value;
             const preferences = document.getElementById('preferences').value.trim();
             const address = document.getElementById('address').value.trim();
-                    
+
             //validate email
             if (!emailRegex.test(email)) {
                 showError('emailError', 'Please enter a valid email address.');
@@ -194,7 +195,7 @@
 
             }
 
-           //validate password
+            //validate password
             if (!passwordRegex.test(password)) {
                 showError('passwordError', 'Password must be at least 8 characters long and contain both letters and numbers.');
                 hasError = true;
@@ -208,25 +209,25 @@
 
             }
 
-        //validate address
+            //validate address
             if (!address) {
                 showError('addressError', 'Please provide your address.');
                 hasError = true;
 
-            return;
-        }
+                return;
+            }
             if (hasError) {
-                    return; 
-                }
+                return;
+            }
 
-        const payload = {
-            name,
-            email,
-            password,
-            password_confirmation: passwordConfirmation,
-            preferences,
-            address,
-        };
+            const payload = {
+                name,
+                email,
+                password,
+                password_confirmation: passwordConfirmation,
+                preferences,
+                address,
+            };
 
 
             try {
@@ -246,22 +247,32 @@
                     setCookie('token', data.token || '');
                     setCookie('user', JSON.stringify(data.user || {}));
 
+                    
+
                     messageDiv.style.color = 'green';
                     messageDiv.textContent = 'Account created! Redirecting...';
 
                     setTimeout(() => {
-                        window.location.href = 'profile.php';
+                        window.location.href = 'login.php';
                     }, 2000);
                 } else {
-                    messageDiv.textContent = data.message || 'Registration failed.';
+                    showModal("Erorr", `${data.message || 'Registration failed.'}`);
+                    
                 }
             } catch (error) {
                 console.error(error);
-                messageDiv.textContent = 'Something went wrong. Please try again.';
+                showModal("Erorr", `${error || 'Registration failed.'}`);
             }
         });
-    </script>
 
+        function setCookie(name, value, days = 7) {
+            const expires = new Date(Date.now() + days * 864e5).toUTCString();
+            document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Your global modal script -->
+    <script src="../assets/global-modal.js"></script>
 </body>
 
 </html>

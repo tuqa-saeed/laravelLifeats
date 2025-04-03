@@ -97,6 +97,8 @@
             text-decoration: underline;
         }
     </style>
+    <?php include '../assets/confirm.php'; ?>
+    <?php include '../assets/modal.php'; ?>
 </head>
 
 <body>
@@ -122,17 +124,17 @@
         const messageDiv = document.getElementById('message');
 
         // Validate email format
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-        messageDiv.textContent = 'Please enter a valid email address.';
-        return;
-         }
+        // const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // if (!emailPattern.test(email)) {
+        //     messageDiv.textContent = 'Please enter a valid email address.';
+        //     return;
+        // }
 
-        // Validate password length
-        if (password.length < 6) {
-        messageDiv.textContent = 'Password must be at least 6 characters long.';
-        return;
-    }
+        // // Validate password length
+        // if (password.length < 6) {
+        //     messageDiv.textContent = 'Password must be at least 6 characters long.';
+        //     return;
+        // }
 
 
         form.addEventListener('submit', async (e) => {
@@ -160,17 +162,16 @@
                     setCookie('token', data.token);
                     setCookie('user', JSON.stringify(data.user));
 
-                    messageDiv.style.color = 'green';
-                    messageDiv.textContent = 'Welcome to Lifeats! Redirecting...';
+                    showModal("Login Successful!", "Welcome to Lifeats! Redirecting...")
 
                     setTimeout(() => {
                         window.location.href = 'profile.php';
                     }, 1500);
                 } else {
-                    messageDiv.textContent = data.message || 'Login failed';
+                    showModal("Login failed!", `${ data.message || 'Login failed'}`)
                 }
             } catch (error) {
-                messageDiv.textContent = 'Server error. Please try again later.';
+                showModal("Login Successful!", 'Server error. Please try again later.')
                 console.error(error);
             }
         });
@@ -180,6 +181,9 @@
             document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Your global modal script -->
+    <script src="../assets/global-modal.js"></script>
 </body>
 
 </html>
