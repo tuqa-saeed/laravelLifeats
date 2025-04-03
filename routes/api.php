@@ -3,8 +3,8 @@
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RegisteredUserController;
 use App\Http\Controllers\AuthenticatedSessionController;
-// use App\Http\Controllers\UserController
-use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\UserController;
+//use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\MealController;
 use App\Http\Controllers\Admin\SubscriptionController;
 use Illuminate\Support\Facades\Route;
@@ -14,10 +14,8 @@ use App\Http\Controllers\Admin\MealSelectionController;
 use App\Http\Controllers\Admin\MealScheduleController;
 use App\Http\Controllers\Admin\PaymentController;
 
-
-//----------------------------------------------------------------
-// Tuqa Section
 // Public routes for registration and login
+
 Route::post('/register', [RegisteredUserController::class, 'registerUser']);
 Route::post('/login', [AuthenticatedSessionController::class, 'loginUser']);
 
@@ -26,20 +24,10 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->midd
 // Sanctum protected routes
 Route::middleware('auth:sanctum')->group(function () {
 
-    Route::put('/user', [App\Http\Controllers\UserController::class, 'updateUserProfile']);
-    Route::get('/user', [App\Http\Controllers\UserController::class, 'getUserProfile']);
-    Route::post('/user-subscriptions/subscribe', [App\Http\Controllers\UserSubscriptionController::class, 'storeWithAutoSchedule']);
+Route::put('/user', [UserController::class, 'updateUserProfile']);
+Route::get('/user', [UserController::class, 'getUserProfile']);
 
-
-    Route::post('/meal-selections/select', [\App\Http\Controllers\MealSelectionController::class, 'selectMeal']);
-
-    Route::post('/meal-selections/submit', [\App\Http\Controllers\MealSelectionController::class, 'submitSelection']);
-    Route::post('/ml/confirm', [App\Http\Controllers\MealSelectionController::class, 'confirmsDay']);
 });
-Route::get('/user-subscriptions/{user_id}/schedule', [App\Http\Controllers\UserSubscriptionController::class, 'getUserSchedule']);
-
-//----------------------------------------------------------------
-
 
 
 
@@ -84,8 +72,9 @@ Route::apiResource('admin/payments', PaymentController::class)->only(['index', '
 // ------------------------------------------------------------
 // Saheb – User Subsicription controls (User Side)
 
-Route::get('/subscriptions', [App\Http\Controllers\SubscriptionController::class, 'index']);
-Route::get('/subscription-status', [App\Http\Controllers\SubscriptionController::class, 'getSubscriptionStatus']);
+Route::get('/subscriptions', [ App\Http\Controllers\SubscriptionController::class, 'index']);
+Route::post('/subscribe', [ App\Http\Controllers\SubscriptionController::class, 'subscribeToPlan']);
+Route::get('/subscription-status', [ App\Http\Controllers\SubscriptionController::class, 'getSubscriptionStatus']);
 // ------------------------------------------------------------
 
 
@@ -108,3 +97,4 @@ Route::apiResource('meal-selections', \App\Http\Controllers\MealSelectionControl
 Route::post('/meal-selections/select/{userId}/{date}', [\App\Http\Controllers\MealSelectionController::class, 'selectMealForDate']);
 
 // ------------------------------------------------------------
+

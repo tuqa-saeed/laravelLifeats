@@ -97,6 +97,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="faq.html">FAQ</a>
+
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/./Meals/php/meal.php">Famous Meals</a>

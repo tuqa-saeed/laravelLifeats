@@ -17,7 +17,8 @@
     <div class="container">
       <h1 class="display-3 fw-bold mb-4">The Best Time to Start? Now.</h1>
       <p class="lead mb-5" style="font-weight: bold;">Take the leap—your future self will thank you.</p>
-      <a href="#" class="btn">Get Started</a>
+     <a href="#" class="btn">Get Started</a>
+ 
     </div>
   </section>
   <!-- Meal Plans Section -->
@@ -189,7 +190,7 @@
 
 
   <!-- FAQ Section Matching Image Style -->
-  <section class="faq-section py-5">
+  <section  class="faq-section py-5">
     <div class="container">
       <div class="text-center mb-5">
         <h1 class="display-4 fw-bold mb-3" style="color: #333;">Answer all your questions</h1>

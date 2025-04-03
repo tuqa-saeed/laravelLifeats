@@ -11,3 +11,13 @@ use App\Http\Controllers\UserController;
 
 // Route::apiResource('products', ProductsController::class);
 // use Illuminate\Support\Facades\Session;
+
+use Illuminate\Support\Facades\Auth;
+use App\Models\User; 
+
+Route::get('/login', function () {
+    $user = User::find(1); 
+    Auth::login($user);
+    return redirect('/profile
+    '); 
+});
