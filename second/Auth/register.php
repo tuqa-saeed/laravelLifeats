@@ -92,6 +92,17 @@
             color: #e85d17;
             text-decoration: underline;
         }
+        #error {
+    /* تخصيص الأنماط باستخدام ID */
+    font-size: 1rem;
+}
+
+.error {
+    /* تخصيص الأنماط باستخدام class */
+    color: red;
+}
+
+       
     </style>
 </head>
 
@@ -104,22 +115,36 @@
             <form id="registerForm">
                 <div class="mb-3">
                     <label for="name" class="form-label">Full Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="e.g. John Doe" required>
+                    <input type="text" class="form-control" id="name" placeholder="Enter Your Name" required>
+                    <div id="nameError" class="error"></div>
+
                 </div>
 
                 <div class="mb-3">
                     <label for="email" class="form-label">Email Address</label>
                     <input type="email" class="form-control" id="email" placeholder="you@lifeats.com" required>
+                    <div id="emailError" class="error"></div>
+
                 </div>
 
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="•••••••••••" required>
+                    <div id="passwordError" class="error"></div>
+
                 </div>
 
                 <div class="mb-3">
                     <label for="password_confirmation" class="form-label">Confirm Password</label>
                     <input type="password" class="form-control" id="password_confirmation" placeholder="Repeat your password" required>
+                    <div id="passwordConfirmationError" class="error"></div>
+
+                </div>
+                <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="Your address" required>
+                <div id="addressError" class="error"></div>
+
                 </div>
 
                 <div class="mb-3">
@@ -140,16 +165,69 @@
         const form = document.getElementById('registerForm');
         const messageDiv = document.getElementById('message');
 
+        //RegEx for email and password validation
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+        function showError(elementId, message) {
+        const errorDiv = document.getElementById(elementId);
+        errorDiv.textContent = message;
+        }
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const payload = {
-                name: document.getElementById('name').value.trim(),
-                email: document.getElementById('email').value.trim(),
-                password: document.getElementById('password').value,
-                password_confirmation: document.getElementById('password_confirmation').value,
-                preferences: document.getElementById('preferences').value.trim(),
-            };
+            let hasError = false;
+
+            document.querySelectorAll('.error').forEach(errorDiv => errorDiv.textContent = '');
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const passwordConfirmation = document.getElementById('password_confirmation').value;
+            const preferences = document.getElementById('preferences').value.trim();
+            const address = document.getElementById('address').value.trim();
+                    
+            //validate email
+            if (!emailRegex.test(email)) {
+                showError('emailError', 'Please enter a valid email address.');
+                hasError = true;
+
+            }
+
+           //validate password
+            if (!passwordRegex.test(password)) {
+                showError('passwordError', 'Password must be at least 8 characters long and contain both letters and numbers.');
+                hasError = true;
+
+            }
+
+            //passwordConfirmation 
+            if (password !== passwordConfirmation) {
+                showError('passwordConfirmationError', 'Passwords do not match.');
+                hasError = true;
+
+            }
+
+        //validate address
+            if (!address) {
+                showError('addressError', 'Please provide your address.');
+                hasError = true;
+
+            return;
+        }
+            if (hasError) {
+                    return; 
+                }
+
+        const payload = {
+            name,
+            email,
+            password,
+            password_confirmation: passwordConfirmation,
+            preferences,
+            address,
+        };
+
 
             try {
                 const res = await fetch('http://127.0.0.1:8000/api/register', {

@@ -121,6 +121,20 @@
         const form = document.getElementById('loginForm');
         const messageDiv = document.getElementById('message');
 
+        // Validate email format
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+        messageDiv.textContent = 'Please enter a valid email address.';
+        return;
+         }
+
+        // Validate password length
+        if (password.length < 6) {
+        messageDiv.textContent = 'Password must be at least 6 characters long.';
+        return;
+    }
+
+
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 

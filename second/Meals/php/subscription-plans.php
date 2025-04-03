@@ -6,10 +6,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Subscription Plans</title>
   <link rel="stylesheet" href="../css/subscription-plans.css" />
+  <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
 
-</head>
+        .page-title {
+            font-size: 2rem;
+            font-weight: bold;
+            display: inline; 
+            background: linear-gradient(to right, #ff691c, #ff9d57);
+            -webkit-background-clip: text;
+            color: transparent;
+            animation: fadeIn 2s ease-in-out, glowing 3s infinite alternate, wave 4s infinite ease-in-out;
+        }
 
-<body>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glowing {
+            0% {
+                text-shadow: 0 0 5px rgba(255, 105, 28, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 15px rgba(255, 157, 87, 0.9);
+            }
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-2deg); }
+            100% { transform: rotate(0deg); }
+        }
+    </style>
   <?php
   require_once __DIR__ . "/../../Homepage/includes/navbar.php";
   ?>
@@ -67,7 +107,9 @@
     }
 
     document.addEventListener("DOMContentLoaded", loadSubscriptions);
+    
   </script>
+  
 </body>
 
 </html>

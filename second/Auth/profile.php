@@ -91,7 +91,7 @@
             resize: none;
         }
 
-        /* ✅ Final Logout Button Styling */
+        /*   Logout Button Styling */
         .logout-fixed {
             background-color: white;
             color: #ff691c;
@@ -151,6 +151,10 @@
                         <div class="mb-3">
                             <label for="preferences" class="form-label">Preferences / Allergies</label>
                             <textarea class="form-control" id="preferences" rows="3" placeholder="No peanuts, dairy-free..."></textarea>
+                        </div>
+                        <div class="mb-3">
+                        <label for="address" class="form-label">Address</label>
+                        <textarea class="form-control" id="address" rows="3" placeholder="Enter your address here..."></textarea>
                         </div>
                         <div class="d-flex justify-content-between gap-3 flex-wrap mt-4">
                             <button id="logoutBtn" type="button" class="btn btn-outline-orange">🚪 Logout</button>
@@ -278,7 +282,8 @@
                         body: JSON.stringify({
                             name,
                             email,
-                            preferences
+                            preferences,
+                            address
                         })
                     });
 
