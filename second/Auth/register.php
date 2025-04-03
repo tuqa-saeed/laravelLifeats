@@ -260,6 +260,7 @@
                 messageDiv.textContent = 'Something went wrong. Please try again.';
             }
         });
+        
     </script>
 
 </body>

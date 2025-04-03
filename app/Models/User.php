@@ -26,7 +26,8 @@ class User extends Authenticatable
                             'role', // <-- important
                             'preferences',
                             'allergies',
-                            'password'
+                            'password',
+                            'google_id',
                            ];
     /**
      * The attributes that should be hidden for serialization.

@@ -318,6 +318,10 @@
         }
 
         fetchMealSchedule();
+        // Check if token exists in localStorage
+        $(document).ready(function() {
+    let token = localStorage.getItem("token");
+        });
     </script>
     <?php
     require_once __DIR__ . "/../Homepage/includes/footer.php";

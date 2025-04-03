@@ -14,10 +14,9 @@ use App\Http\Controllers\UserController;
 
 use Illuminate\Support\Facades\Auth;
 use App\Models\User; 
+use App\Http\Controllers\GoogleController;
 
-Route::get('/login', function () {
-    $user = User::find(1); 
-    Auth::login($user);
-    return redirect('/profile
-    '); 
-});
+
+Route::get('login/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('login/google/callback', [GoogleController::class, 'handleGoogleCallback']);
+

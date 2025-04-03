@@ -7,6 +7,7 @@
     <title>Lifeats - Profile Tabs</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
     <?php include '../assets/confirm.php'; ?>
     <?php include '../assets/modal.php'; ?>
     <style>
@@ -332,6 +333,24 @@
 
 
         }
+        let token = localStorage.getItem("token");
+
+     $.ajax({
+    url: 'url-to-your-protected-route', 
+    method: 'GET',
+    headers: {
+        'Authorization': 'Bearer ' + token 
+    },
+    success: function(response) {
+        console.log("fetched data successfully");
+    },
+    error: function(error) {
+        console.log("error ", error);
+    }
+});
+
+
+       
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Your global modal script -->

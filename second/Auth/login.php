@@ -7,6 +7,8 @@
     <title>Login | Lifeats</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <style>
         body {
             background: linear-gradient(to right, #ff691c, #ff9d57);
@@ -96,6 +98,30 @@
             color: #e85d17;
             text-decoration: underline;
         }
+        .google-btn {
+        background-color: #fff;
+        border: 1px solid #dcdcdc;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #333;
+        border-radius: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    .google-btn:hover {
+        background-color: #f5f5f5;
+        border-color: #ccc;
+    }
+
+    .google-logo {
+        width: 30px;
+        height: 25px;
+    }
     </style>
 </head>
 
@@ -112,6 +138,11 @@
             <input type="password" id="password" required placeholder="•••••••••••">
 
             <button type="submit">Let's Go →</button>
+            <br><br>
+            <button id="google-login" class="google-btn">
+            <img src="https://i.pinimg.com/originals/c5/a8/a1/c5a8a1fc47b59176b3069647f4006063.jpg" alt="Google logo" class="google-logo"> 
+            Login via Google
+            </button>
             <a href="register.php" class="register-link">I don’t have an account</a>
             <div class="message" id="message"></div>
         </form>
@@ -121,18 +152,7 @@
         const form = document.getElementById('loginForm');
         const messageDiv = document.getElementById('message');
 
-        // Validate email format
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailPattern.test(email)) {
-        messageDiv.textContent = 'Please enter a valid email address.';
-        return;
-         }
-
-        // Validate password length
-        if (password.length < 6) {
-        messageDiv.textContent = 'Password must be at least 6 characters long.';
-        return;
-    }
+        
 
 
         form.addEventListener('submit', async (e) => {
@@ -179,6 +199,31 @@
             const expires = new Date(Date.now() + days * 864e5).toUTCString();
             document.cookie = `${name}=${encodeURIComponent(value)}; expires=${expires}; path=/`;
         }
+
+        $(document).ready(function() {
+            $("#google-login").click(function() {
+                window.location.href = "http://127.0.0.1:8000/login/google";
+            });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('code')) {
+                $.ajax({
+                    url: "http://127.0.0.1:8000/login/google/callback",
+                    method: "GET",
+                    success: function(response) {
+                        console.log("log in successfully", response);
+
+                        localStorage.setItem("token", response.token);
+
+                        window.location.href = "dashboard.php";
+                    },
+                    error: function(error) {
+                        console.log("Login failed", error);
+                    }
+                });
+            }
+        });
+         
     </script>
 </body>
 
