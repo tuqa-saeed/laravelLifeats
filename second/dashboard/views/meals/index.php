@@ -34,10 +34,11 @@
         <div class="page-inner">
           <h1>Meals List</h1>
           <a href="index.php?page=meals/create" class="btn btn-primary my-2">Add New Meal</a>
-          <form action="index.php?controller=product&action=search" method="POST" class="form-inline my-2 d-flex">
-            <input type="text" name="keyword" class="form-control" placeholder="Search for products">
+          <form id="meal-search-form" class="form-inline my-2 d-flex">
+            <input type="text" name="keyword" class="form-control" placeholder="Search for meals">
             <button type="submit" class="btn btn-primary">Search</button>
           </form>
+
           <table class="table table-striped">
             <thead class="table-dark">
               <tr>
@@ -80,6 +81,7 @@
     const itemsPerPage = 5;
     let currentPage = 1;
     let mealsData = [];
+    let filteredMeals = [];
     const spinnerOverlay = document.getElementById('spinner-overlay');
 
     function renderTablePage(page) {
@@ -88,7 +90,7 @@
 
       const start = (page - 1) * itemsPerPage;
       const end = start + itemsPerPage;
-      const meals = mealsData.slice(start, end);
+      const meals = filteredMeals.slice(start, end);
 
       meals.forEach(meal => {
         const tr = document.createElement('tr');
@@ -114,10 +116,10 @@
     }
 
     function updatePaginationInfo() {
-      const totalPages = Math.ceil(mealsData.length / itemsPerPage);
-      document.getElementById('pagination-info').textContent = `Page ${currentPage} of ${totalPages}`;
+      const totalPages = Math.ceil(filteredMeals.length / itemsPerPage);
+      document.getElementById('pagination-info').textContent = `Page ${currentPage} of ${totalPages || 1}`;
       document.getElementById('prevPage').disabled = currentPage === 1;
-      document.getElementById('nextPage').disabled = currentPage === totalPages;
+      document.getElementById('nextPage').disabled = currentPage === totalPages || totalPages === 0;
     }
 
     document.getElementById('prevPage').addEventListener('click', () => {
@@ -128,7 +130,7 @@
     });
 
     document.getElementById('nextPage').addEventListener('click', () => {
-      const totalPages = Math.ceil(mealsData.length / itemsPerPage);
+      const totalPages = Math.ceil(filteredMeals.length / itemsPerPage);
       if (currentPage < totalPages) {
         currentPage++;
         renderTablePage(currentPage);
@@ -136,18 +138,43 @@
     });
 
     spinnerOverlay.style.display = 'block'; // Show spinner immediately
+
     // Initial fetch
     fetch("http://127.0.0.1:8000/api/admin/meals")
       .then(res => res.json())
       .then(meals => {
         mealsData = meals;
+        filteredMeals = [...meals]; // Start with all meals
         renderTablePage(currentPage);
       })
       .catch(err => {
         console.error('Failed to load meals:', err);
-      }).finally(() => {
-        spinnerOverlay.style.display = 'none';
       })
+      .finally(() => {
+        spinnerOverlay.style.display = 'none';
+      });
+
+    // Search handling
+    document.getElementById('meal-search-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const keyword = this.keyword.value.trim().toLowerCase();
+
+      if (!keyword) {
+        filteredMeals = [...mealsData];
+      } else {
+        filteredMeals = mealsData.filter(meal =>
+          meal.name.toLowerCase().includes(keyword) ||
+          meal.calories.toString().includes(keyword) ||
+          meal.protein.toString().includes(keyword) ||
+          meal.carbs.toString().includes(keyword) ||
+          meal.fats.toString().includes(keyword)
+        );
+      }
+
+      currentPage = 1;
+      renderTablePage(currentPage);
+    });
   </script>
 
 </body>

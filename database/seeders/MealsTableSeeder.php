@@ -134,6 +134,7 @@ class MealsTableSeeder extends Seeder
                     'subscription_id' => 1
                 ],
                 // Breakfast
+                // Breakfast
                 [
                     'name' => 'Spinach & Feta Omelette',
                     'description' => 'Fluffy omelette with sautÃ©ed spinach and crumbled feta cheese.',
@@ -141,7 +142,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 20,
                     'carbs' => 6,
                     'fats' => 24,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/traditional-azerbaijani-kookoo-herbs-eggs-dish-served-with-yogurt_140725-7102.jpg?t=st=1743596931~exp=1743600531~hmac=6bf595ec70cc338b7d0908228210202052b2b5690ae38cb81350f6efb40f693e&w=740',
                     'category_id' => 1,
                     'subscription_id' => 4
                 ],
@@ -152,7 +153,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 10,
                     'carbs' => 25,
                     'fats' => 16,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/front-view-delicious-food-concept_23-2148578402.jpg?uid=R185485274&ga=GA1.1.304909007.1737273676&semt=ais_hybrid',
                     'category_id' => 1,
                     'subscription_id' => 5
                 ],
@@ -165,7 +166,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 28,
                     'carbs' => 35,
                     'fats' => 18,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/wrap-salad-roll-with-tuna-corn-salad_1339-6840.jpg?uid=R185485274&ga=GA1.1.304909007.1737273676&semt=ais_hybrid',
                     'category_id' => 2,
                     'subscription_id' => 2
                 ],
@@ -176,7 +177,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 20,
                     'carbs' => 55,
                     'fats' => 17,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/salmon-poke-bowl-flat-lay-photography_53876-108183.jpg?uid=R185485274&ga=GA1.1.304909007.1737273676&semt=ais_hybrid',
                     'category_id' => 2,
                     'subscription_id' => 5
                 ],
@@ -189,7 +190,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 12,
                     'carbs' => 15,
                     'fats' => 30,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/tasty-beautiful-pasta-closeup-with-spinach-cheese-olives-basil-nuts_1220-1185.jpg?uid=R185485274&ga=GA1.1.304909007.1737273676&semt=ais_hybrid',
                     'category_id' => 3,
                     'subscription_id' => 4
                 ],
@@ -200,7 +201,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 32,
                     'carbs' => 40,
                     'fats' => 22,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/top-view-cooked-bell-peppers-grey-surface-food-dolma-vegetable-meal-beef_140725-74493.jpg?uid=R185485274&ga=GA1.1.304909007.1737273676&semt=ais_hybrid',
                     'category_id' => 3,
                     'subscription_id' => 1
                 ],
@@ -213,7 +214,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 16,
                     'carbs' => 12,
                     'fats' => 9,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/fruit-salad-half-pineapple-spoon_23-2148494801.jpg?uid=R185485274&ga=GA1.1.304909007.1737273676&semt=ais_hybrid',
                     'category_id' => 4,
                     'subscription_id' => 2
                 ],
@@ -224,7 +225,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 5,
                     'carbs' => 20,
                     'fats' => 11,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/top-view-breakfast-cereal-bars-with-nuts_23-2148697610.jpg?uid=R185485274&ga=GA1.1.304909007.1737273676&semt=ais_hybrid',
                     'category_id' => 4,
                     'subscription_id' => 3
                 ],
@@ -237,7 +238,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 10,
                     'carbs' => 25,
                     'fats' => 22,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/thai-papaya-salad-wooden-plate-with-sticky-rice-dried-shrimp_1150-20260.jpg?uid=R185485274&ga=GA1.1.304909007.1737273676&semt=ais_hybrid',
                     'category_id' => 5,
                     'subscription_id' => 4
                 ],
@@ -248,10 +249,10 @@ class MealsTableSeeder extends Seeder
                     'protein' => 30,
                     'carbs' => 12,
                     'fats' => 24,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://img.freepik.com/free-photo/tuna-salad-with-lettuce-olives-corn-tomatoes-top-view_114579-8119.jpg?uid=R185485274&ga=GA1.1.304909007.1737273676&semt=ais_hybrid',
                     'category_id' => 5,
                     'subscription_id' => 1
-                ], // Breakfast
+                ],
                 [
                     'name' => 'Greek Yogurt Parfait',
                     'description' => 'Layered Greek yogurt, granola, and mixed berries.',
@@ -259,7 +260,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 15,
                     'carbs' => 35,
                     'fats' => 9,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://images.pexels.com/photos/414262/pexels-photo-414262.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                     'category_id' => 1, // Breakfast
                     'subscription_id' => 1
                 ],
@@ -270,7 +271,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 9,
                     'carbs' => 45,
                     'fats' => 10,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://images.pexels.com/photos/28766049/pexels-photo-28766049/free-photo-of-healthy-oatmeal-breakfast-with-fresh-blueberries.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load',
                     'category_id' => 1,
                     'subscription_id' => 2
                 ],
@@ -283,7 +284,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 40,
                     'carbs' => 45,
                     'fats' => 15,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://images.pexels.com/photos/5713761/pexels-photo-5713761.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                     'category_id' => 2,
                     'subscription_id' => 1
                 ],
@@ -294,7 +295,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 18,
                     'carbs' => 48,
                     'fats' => 14,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://via.placeholder.com/150https://images.pexels.com/photos/17597408/pexels-photo-17597408/free-photo-of-a-bowl-with-a-healthy-salad.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                     'category_id' => 2,
                     'subscription_id' => 3
                 ],
@@ -307,7 +308,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 38,
                     'carbs' => 20,
                     'fats' => 30,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://media.istockphoto.com/id/1214416454/photo/barbecued-salmon-fried-potatoes-and-vegetables-on-wooden-background.jpg?s=1024x1024&w=is&k=20&c=x4tp5_8xM2Vl_udvpt9hVXslwL6_6IlQjpi2w2Co-NQ=',
                     'category_id' => 3,
                     'subscription_id' => 2
                 ],
@@ -318,7 +319,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 22,
                     'carbs' => 50,
                     'fats' => 18,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://images.pexels.com/photos/30506288/pexels-photo-30506288/free-photo-of-delicious-noodle-dish-with-herbs-and-chopsticks.jpeg?auto=compress&cs=tinysrgb&w=800&lazy=load',
                     'category_id' => 3,
                     'subscription_id' => 5
                 ],
@@ -331,7 +332,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 6,
                     'carbs' => 15,
                     'fats' => 10,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://media.istockphoto.com/id/1069747868/photo/healthy-organic-energy-granola-bolls-with-nuts-cacao-oats-and-raisins-vegetarian-sweet-bites.jpg?s=612x612&w=0&k=20&c=kK2lJi-eutEMb7tyLQ3EFYyuK4UMF4oIW0vewoXgYZQ=',
                     'category_id' => 4,
                     'subscription_id' => 1
                 ],
@@ -342,7 +343,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 5,
                     'carbs' => 12,
                     'fats' => 8,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://images.pexels.com/photos/5852261/pexels-photo-5852261.jpeg?auto=compress&cs=tinysrgb&w=600',
                     'category_id' => 4,
                     'subscription_id' => 3
                 ],
@@ -355,7 +356,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 10,
                     'carbs' => 20,
                     'fats' => 22,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://media.istockphoto.com/id/153830105/photo/caesar-salad.jpg?s=612x612&w=0&k=20&c=9LTrXzhR5Fi5kVT91rzsuYd-rb7Ighgm7lt60VAfgUg=',
                     'category_id' => 5,
                     'subscription_id' => 2
                 ],
@@ -366,7 +367,7 @@ class MealsTableSeeder extends Seeder
                     'protein' => 16,
                     'carbs' => 35,
                     'fats' => 14,
-                    'image_url' => 'https://via.placeholder.com/150',
+                    'image_url' => 'https://images.pexels.com/photos/1059905/pexels-photo-1059905.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
                     'category_id' => 5,
                     'subscription_id' => 4
                 ],
@@ -466,7 +467,7 @@ class MealsTableSeeder extends Seeder
                     'subscription_id' => 2
                 ],
 
-                // Salads
+                // Saflads
                 [
                     'name' => 'Arugula & Beet Salad',
                     'description' => 'Fresh arugula with roasted beets, goat cheese, and walnuts.',

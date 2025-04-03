@@ -106,24 +106,27 @@
         if (scheduleId) {
             const spinnerOverlay = document.getElementById('spinner-overlay');
             spinnerOverlay.style.display = 'block';
+
             fetch(`http://127.0.0.1:8000/api/admin/meal-schedules/${scheduleId}`)
                 .then(res => res.json())
                 .then(schedule => {
-                    // Schedule
+                    console.log(schedule);
+
+                    // Schedule info
                     document.getElementById('schedule-id').textContent = schedule.id;
                     document.getElementById('schedule-date').textContent = schedule.date;
                     document.getElementById('schedule-locked').textContent = schedule.locked ? 'Yes' : 'No';
 
-                    // User
+                    // User info
                     const user = schedule.user_subscription.user;
                     document.getElementById('user-name').textContent = user.name;
                     document.getElementById('user-email').textContent = user.email;
 
-                    // Subscription ID
+                    // Subscription info
                     const subscriptionId = schedule.user_subscription.subscription_id;
                     document.getElementById('subscription-id-header').textContent = subscriptionId;
 
-                    // ✅ Fetch subscription inside here
+                    // Fetch subscription details
                     fetch(`http://127.0.0.1:8000/api/admin/subscriptions/${subscriptionId}`)
                         .then(res => {
                             if (!res.ok) throw new Error('Failed to fetch subscription');
@@ -141,31 +144,40 @@
                             console.error('Subscription fetch failed:', err);
                         });
 
-                    // Meals
+                    // Meal Selections
                     const container = document.getElementById('meal-selection-list');
                     container.innerHTML = '';
 
-                    schedule.selections.forEach(selection => {
+                    const hasCustomSelection = schedule.selections.some(sel => sel.selected === 1);
+
+                    const displayMeals = hasCustomSelection ?
+                        schedule.selections.filter(sel => sel.selected === 1) :
+                        schedule.selections;
+
+                    displayMeals.forEach(selection => {
                         const meal = selection.meal;
                         const card = document.createElement('div');
                         card.className = 'card mb-3';
 
                         card.innerHTML = `
-          <div class="row no-gutters">
-            <div class="col-md-3">
-              <img src="${meal.image_url}" class="img-fluid rounded-start" alt="${meal.name}">
-            </div>
-            <div class="col-md-9">
-              <div class="card-body">
-                <h5 class="card-title">${meal.name}</h5>
-                <p class="card-text">${meal.description}</p>
-                <p class="card-text">
-                  <small>Calories: ${meal.calories} | Protein: ${meal.protein}g | Carbs: ${meal.carbs}g | Fats: ${meal.fats}g</small>
-                </p>
+            <div class="row no-gutters">
+              <div class="col-md-3">
+                <img src="${meal.image_url}" class="img-fluid rounded-start" alt="${meal.name}">
+              </div>
+              <div class="col-md-9">
+                <div class="card-body">
+                  <h5 class="card-title">${meal.name}</h5>
+                  <p class="card-text">${meal.description}</p>
+                  <p class="card-text">
+                    <small>Calories: ${meal.calories} | Protein: ${meal.protein}g | Carbs: ${meal.carbs}g | Fats: ${meal.fats}g</small>
+                  </p>
+                  <span class="badge bg-${selection.selected === 1 ? 'success' : 'secondary'}">
+                    ${selection.selected === 1 ? 'Selected' : 'Default'}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-        `;
+          `;
 
                         container.appendChild(card);
                     });
@@ -173,13 +185,15 @@
                 .catch(err => {
                     console.error('Error loading schedule:', err);
                     alert('Failed to load meal schedule.');
-                }).finally(() => {
-                    spinnerOverlay.style.display = 'none'; // Hide spinner
+                })
+                .finally(() => {
+                    spinnerOverlay.style.display = 'none';
                 });
         } else {
             alert('No schedule ID provided.');
         }
     </script>
+
 
 </body>
 

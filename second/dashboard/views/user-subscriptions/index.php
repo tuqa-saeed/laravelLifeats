@@ -35,17 +35,17 @@
             <h1>User Subscriptions</h1>
             <!-- Generate Report Button -->
             <div>
-              <a href="/watch_store/dashboard/services/orderReport/order_report.php" class="btn btn-danger">
+              <button onclick="generatePDF()" class="btn btn-danger">
                 <i class="fas fa-file-download"></i> PDF
-              </a>
-              <a href="/watch_store/dashboard/services/orderReport/order_report_csv.php" class="btn btn-success">
+              </button>
+              <button onclick="generateCSV()" class="btn btn-success">
                 <i class="fas fa-file-download"></i> CSV
-              </a>
+              </button>
             </div>
           </div>
 
           <div class="mb-3">
-            <form action="index.php?controller=user_subscription&action=search" method="POST" class="form-inline d-flex">
+            <form id="user-subscription-search-form" class="form-inline d-flex">
               <input type="text" name="keyword" class="form-control" placeholder="Search by user name, subscription, or status">
               <button type="submit" class="btn btn-primary">Search</button>
             </form>
@@ -165,7 +165,68 @@
           spinnerOverlay.style.display = 'none'; // Hide spinner
         });
     }
+
+    document.getElementById('user-subscription-search-form').addEventListener('submit', function(e) {
+      e.preventDefault(); // stop regular form submission
+
+      const keyword = this.querySelector('[name="keyword"]').value.trim().toLowerCase();
+      const tbody = document.getElementById("subscription-table-body");
+      tbody.innerHTML = ""; // clear previous results
+      spinnerOverlay.style.display = 'block';
+
+      fetch("http://127.0.0.1:8000/api/admin/user-subscriptions")
+        .then(res => res.json())
+        .then(data => {
+          const filtered = data.filter(sub => {
+            const name = sub.user?.name?.toLowerCase() || '';
+            const email = sub.user?.email?.toLowerCase() || '';
+            const subscription = sub.subscription?.name?.toLowerCase() || '';
+            const status = sub.status?.toLowerCase() || '';
+            return name.includes(keyword) || email.includes(keyword) || subscription.includes(keyword) || status.includes(keyword);
+          });
+
+          if (filtered.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="7" class="text-center text-muted">No results found.</td></tr>`;
+          } else {
+            filtered.forEach(sub => {
+              const tr = document.createElement("tr");
+              const days = getDaysRemaining(sub.end_date);
+              tr.innerHTML = `
+            <td>${sub.id}</td>
+            <td>${sub.user?.name || 'N/A'}</td>
+            <td>${sub.user?.email || 'N/A'}</td>
+            <td>${sub.subscription?.name || 'N/A'}</td>
+            <td>${formatStatus(sub.status)}</td>
+            <td>${days}</td>
+            <td>
+              <a href="index.php?page=user-subscriptions/view&id=${sub.id}" class="btn btn-sm btn-dark">
+                <i class="fas fa-info-circle"></i>
+              </a>
+              <form onsubmit="return deleteSubscription(event, ${sub.id})" style="display:inline;">
+                <button type="submit" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+              </form>
+            </td>
+          `;
+              tbody.appendChild(tr);
+            });
+          }
+        })
+        .catch(err => {
+          tbody.innerHTML = `<tr><td colspan="7" class="text-danger text-center">${err.message}</td></tr>`;
+        })
+        .finally(() => {
+          spinnerOverlay.style.display = 'none';
+        });
+    });
   </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <script src="services/orderReport/order_report.js"></script>
+  <script src="services/orderReport/order_report_csv.js"></script>
+
+
+
 </body>
 
 </html>

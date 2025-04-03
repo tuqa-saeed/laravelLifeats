@@ -8,14 +8,14 @@ use Illuminate\Http\Request;
 class MealController extends Controller
 {
     public function index()
-{
-    $meals = Meal::all();
+    {
+        $meals = Meal::all();
 
-    return response()->json([
-        'status' => true,
-        'data' => $meals
-    ], 200);
-}
+        return response()->json([
+            'status' => true,
+            'data' => $meals
+        ], 200);
+    }
     public function getMealsByCategory($categoryId)
     {
         $meals = Meal::where('category_id', $categoryId)->get();

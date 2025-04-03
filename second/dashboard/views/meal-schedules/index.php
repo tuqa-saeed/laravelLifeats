@@ -71,6 +71,8 @@
       fetch('http://127.0.0.1:8000/api/admin/meal-schedules')
         .then(res => res.json())
         .then(data => {
+          console.log(data);;
+
           const tbody = document.getElementById('meals-table-body');
           tbody.innerHTML = '';
 
