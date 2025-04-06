@@ -31,7 +31,7 @@
             <h1 class="display-1 text-danger">404</h1>
             <h4 class="mb-3 text-secondary">Oops! Page not found</h4>
             <p class="lead mb-4">Sorry, the page you’re looking for doesn’t exist or has been moved.</p>
-            <a href="index.php?page=meals/index" class="btn btn-outline-primary px-4">
+            <a href="/dashboard/index.php?page=meals/index" class="btn btn-outline-primary px-4">
                 <i class="fas fa-home me-2"></i>Back to Admin Dashboard
             </a>
         </div>

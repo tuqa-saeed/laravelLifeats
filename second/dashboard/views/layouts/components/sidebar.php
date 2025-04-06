@@ -193,7 +193,7 @@
 
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#delivery">
-            <i class="fas fa-calendar-alt"></i> <!-- New icon -->
+            <i class="fas fa-truck"></i> <!-- Delivery truck -->
             <p>Delivery</p>
             <span class="caret"></span>
           </a>
