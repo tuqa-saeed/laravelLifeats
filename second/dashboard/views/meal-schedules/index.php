@@ -165,7 +165,6 @@
         });
       }
 
-
       // Fetch and render data
       spinnerOverlay.style.display = 'block';
       fetch('http://127.0.0.1:8000/api/admin/meal-schedules')

@@ -82,7 +82,7 @@
 
             card.onclick = function() {
               // Store the plan data in localStorage before navigating
-              // localStorage.setItem('selectedPlan', JSON.stringify(plan));
+              localStorage.setItem('selectedPlan', JSON.stringify(plan));
               window.location.href = `meal-details.php?id=${plan.id}`;
             };
 
