@@ -28,6 +28,85 @@
       opacity: 1;
       transform: scale(1.4);
     }
+
+    .meal-card {
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+      border-radius: 1rem;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      padding: 1.5rem;
+      transition: transform 0.2s ease;
+    }
+
+    .meal-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .meal-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .meal-info {
+      flex: 1;
+    }
+
+    .meal-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .meal-description {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .meal-nutrition-grid {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .meal-nutrition-grid li {
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      color: #333;
+    }
+
+    .meal-nutrition-grid li strong {
+      margin-left: 6px;
+      font-weight: 600;
+    }
+
+    .meal-nutrition-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .nutrient {
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    .nutrient span {
+      margin-right: 6px;
+      font-size: 1rem;
+    }
   </style>
 
 </head>
@@ -89,11 +168,11 @@
           <div class="meal-info">
             <h3 class="meal-name">${meal.name}</h3>
             <p class="meal-description">${meal.description}</p>
-            <ul class="meal-nutrition">
-              <li><strong>Calories:</strong> ${meal.calories}</li>
-              <li><strong>Protein:</strong> ${meal.protein}g</li>
-              <li><strong>Carbs:</strong> ${meal.carbs}g</li>
-              <li><strong>Fats:</strong> ${meal.fats}g</li>
+            <ul class="meal-nutrition-grid">
+              <li>🔥 <strong>Calories:</strong> ${meal.calories}</li>
+              <li>💪 <strong>Protein:</strong> ${meal.protein}g</li>
+              <li>🍞 <strong>Carbs:</strong> ${meal.carbs}g</li>
+              <li>🧈 <strong>Fats:</strong> ${meal.fats}g</li>
             </ul>
           </div>
         `;

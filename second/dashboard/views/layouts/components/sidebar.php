@@ -30,7 +30,31 @@
           <span class="sidebar-mini-icon">
             <i class="fa fa-ellipsis-h"></i>
           </span>
-          <h4 class="text-section">Admin Sections</h4>
+          <h4 class="text-section">Statistics</h4>
+        </li>
+        <li class="nav-item">
+          <a data-bs-toggle="collapse" href="#stat">
+            <i class="fas fa-chart-line"></i> <!-- replaced cart with a better stat icon -->
+            <p>Statistics</p>
+            <span class="caret"></span>
+          </a>
+          <div class="collapse" id="stat">
+            <ul class="nav nav-collapse">
+              <li>
+                <a href="index.php?page=dashboard/index">
+                  <span class="sub-item">Statistics Board</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+
+        <li class="nav-section">
+          <span class="sidebar-mini-icon">
+            <i class="fa fa-ellipsis-h"></i>
+          </span>
+          <h4 class="text-section">Admin Section</h4>
         </li>
 
 

@@ -3,7 +3,8 @@ session_start();
 
 // ROUTING ARRAY FOR `?page=...` ROUTES
 $routes = [
-    "/" => "views/meals/index.php",
+    "/" => "views/dashboard/index.php",
+    "dashboard/index" => "views/dashboard/index.php",
     // Meals
     'meals/index' => 'views/meals/index.php',
     'meals/create' => 'views/meals/create.php',
@@ -35,6 +36,8 @@ $routes = [
 
     "delivery/index" => 'views/delivery/index.php',
     "delivery/show" => 'views/delivery/show.php',
+
+    
 ];
 
 

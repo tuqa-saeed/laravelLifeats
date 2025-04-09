@@ -66,8 +66,9 @@
         }
 
         .navbar-dark .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23ff691c' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
+
 
         /* Ensure the collapsed menu has proper styling */
         @media (max-width: 991.98px) {
@@ -106,10 +107,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/./Meals/php/subscription-plans.php">Subsicriptions</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="faq.html">FAQ</a>
 
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/./Meals/php/meal.php">Famous Meals</a>
                     </li>

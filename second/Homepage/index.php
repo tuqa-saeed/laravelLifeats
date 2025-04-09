@@ -204,7 +204,7 @@
             <h3 class="faq-question py-3 px-4 mb-0 d-flex justify-content-between align-items-center"
               style="background-color: #f8f8f8; border-left: 4px solid #ff691c; cursor: pointer;"
               onclick="toggleAnswer(this)">
-              <span style="font-weight: 600; color: #333;">How does the Right Bite meal plan work?</span>
+              <span style="font-weight: 600; color: #333;">How does the Lifeats meal plan work?</span>
               <i class="fas fa-chevron-down" style="color: #ff691c;"></i>
             </h3>
             <div class="faq-answer px-4 pt-3" style="display: block; border-left: 1px solid #eee;">

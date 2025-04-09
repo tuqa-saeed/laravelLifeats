@@ -141,17 +141,9 @@
                     <div id="passwordConfirmationError" class="error"></div>
 
                 </div>
-                <div class="mb-3">
-                    <label for="address" class="form-label">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="Your address" required>
-                    <div id="addressError" class="error"></div>
 
-                </div>
 
-                <div class="mb-3">
-                    <label for="preferences" class="form-label">Preferences / Allergies</label>
-                    <textarea class="form-control" id="preferences" rows="3" placeholder="No peanuts, dairy-free, etc."></textarea>
-                </div>
+
 
                 <div class="d-grid">
                     <button type="submit" class="btn btn-orange">Join the Feast 🍽️</button>
@@ -185,8 +177,6 @@
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
             const passwordConfirmation = document.getElementById('password_confirmation').value;
-            const preferences = document.getElementById('preferences').value.trim();
-            const address = document.getElementById('address').value.trim();
 
             //validate email
             if (!emailRegex.test(email)) {
@@ -210,12 +200,7 @@
             }
 
             //validate address
-            if (!address) {
-                showError('addressError', 'Please provide your address.');
-                hasError = true;
 
-                return;
-            }
             if (hasError) {
                 return;
             }
@@ -225,8 +210,6 @@
                 email,
                 password,
                 password_confirmation: passwordConfirmation,
-                preferences,
-                address,
             };
 
 
@@ -248,9 +231,8 @@
                     setCookie('user', JSON.stringify(data.user || {}));
 
 
+                    showModal("Success", 'Registration Success!');
 
-                    messageDiv.style.color = 'green';
-                    messageDiv.textContent = 'Account created! Redirecting...';
 
                     setTimeout(() => {
                         window.location.href = 'login.php';
