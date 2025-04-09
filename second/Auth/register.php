@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to left, #ff691c, #ff9d57);
+            background: linear-gradient(to right, #ffe3cc, #ffd8b0);
             font-family: 'Quicksand', sans-serif;
             margin: 0;
         }
@@ -247,7 +247,7 @@
                     setCookie('token', data.token || '');
                     setCookie('user', JSON.stringify(data.user || {}));
 
-                    
+
 
                     messageDiv.style.color = 'green';
                     messageDiv.textContent = 'Account created! Redirecting...';
@@ -257,7 +257,7 @@
                     }, 2000);
                 } else {
                     showModal("Erorr", `${data.message || 'Registration failed.'}`);
-                    
+
                 }
             } catch (error) {
                 console.error(error);

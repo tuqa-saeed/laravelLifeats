@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meal Plan Details</title>
     <link rel="stylesheet" href="../css/meal-details.css">
+    <style>
+        .inside {
+            position: sticky;
+            top: 125px;
+            bottom: 125px;
+            padding-bottom: 44px;
+        }
+    </style>
 </head>
 
 <body>
@@ -26,18 +34,21 @@
     ?>
     <div class="container">
         <div class="left-column">
-            <div class="header">
-                <a href="subscription-plans.php" class="back-button">←</a>
-                <h1 id="mealName">Loading...</h1>
-            </div>
-            <div class="description" id="mealDescription">
-                Loading...
-            </div>
-            <div class="feature-image">
-                <img id="mealImage" src="https://via.placeholder.com/600x400" alt="Meal Plan">
-                <div class="overlay-text">
-                    <h2>Optimal for</h2>
-                    <h3 id="mealGoal">Loading...</h3>
+            <div class="inside">
+                <div class="header">
+                    <a href="subscription-plans.php" class="back-button">←</a>
+                    <h1 id="mealName">Loading...</h1>
+                </div>
+                <div class="description" id="mealDescription">
+                    Loading...
+                </div>
+                <div class="feature-image">
+                    <img id="mealImage" src="https://via.placeholder.com/600x400" alt="Meal Plan">
+                    <a href="sample.html" target="_blank" class="view-menu-button mt-3">View sample menu</a>
+                    <div class="overlay-text">
+                        <h2>Optimal for</h2>
+                        <h3 id="mealGoal">Loading...</h3>
+                    </div>
                 </div>
             </div>
         </div>
@@ -71,7 +82,7 @@
 
             <div class="trial-box">
                 <div>
-                    <div class="title">Try Right Bite for 1 Day?</div>
+                    <div class="title">Try Lifeats for 1 Day?</div>
                     <div class="price" id="trialPrice">Starting JOD 41</div>
                 </div>
                 <a href="#" class="button">Click here</a>
@@ -116,7 +127,6 @@
                 This daily nutrition breakdown can change based on your preferences and dietitian's recommendations.
             </div>
 
-            <a href="#" class="view-menu-button">View sample menu</a>
 
             <div class="price-summary">
                 <div class="price-row">

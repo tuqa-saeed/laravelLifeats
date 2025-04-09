@@ -14,6 +14,8 @@
             top: 0;
             z-index: 1020;
             padding: 0.5rem 1rem;
+            padding-top: 0px;
+            padding-bottom: 0px;
         }
 
         .navbar-brand {
@@ -24,10 +26,19 @@
         }
 
         .logo {
-            width: 70px;
-            height: 70px;
-
+            width: 100px;
+            /* Larger size without overwhelming */
+            height: auto;
+            /* Maintain aspect ratio */
+            object-fit: contain;
+            /* Avoids stretching */
+            display: block;
+            padding: 4px;
+            /* Optional: gives a bit of breathing space */
         }
+
+
+
 
         .navbar-nav .nav-link {
             font-weight: 500;
@@ -80,10 +91,10 @@
     <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
         <div class="container p-0">
             <a class="navbar-brand" href="/Homepage/index.php">
-
-                <img src="../../assets/logo3.ico" alt="" class="logo">
-
+                <img src="../../assets/logo3.ico" alt="Lifeats Logo" class="logo">
             </a>
+
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

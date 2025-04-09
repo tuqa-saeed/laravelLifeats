@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(to right, #ff691c, #ff9d57);
+            background: linear-gradient(to right, #ffe3cc, #ffd8b0);
+            /* Softer orange gradient */
             font-family: 'Quicksand', sans-serif;
             height: 100vh;
             display: flex;
@@ -118,6 +119,8 @@
             <div class="message" id="message"></div>
         </form>
     </div>
+
+
 
     <script>
         const form = document.getElementById('loginForm');

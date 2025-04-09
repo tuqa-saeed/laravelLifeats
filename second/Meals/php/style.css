@@ -1,0 +1,93 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+.day-header {
+    color: #ff7f50;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+.day-divider {
+    background-color: #ff7f50;
+    height: 3px;
+    width: 30px;
+    margin: 0.5rem auto;
+}
+.meal-name {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+.meal-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+    background-color: #f0f0f0;
+    margin-bottom: 1rem;
+}
+.label {
+    background-color: #ff7f50;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    position: absolute;
+    z-index: 1;
+    left: -5px;
+    transform: rotate(-90deg);
+    width: auto;
+    height: auto;
+    font-weight: bold;
+}
+.breakfast-label {
+    top: 90px;
+    left: 14px;
+
+}
+
+.Lunch-label {
+    top: 397px;
+    left:28px;
+
+}
+
+.Dinner-label {
+    top: 725px;
+    left: 28px;
+
+}
+.container-custom {
+    background-color: #f2f2f2;
+    padding: 2rem 4rem;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
+    margin-top: 30px;
+}
+.section-container {
+    background-color: #ffffff;
+    padding: 1.5rem 2rem;
+    border-radius: 1rem;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    position: relative;
+    z-index: 0;
+}
+.row {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+.col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.col-image {
+    border-radius: 0.7rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
