@@ -32,8 +32,8 @@ class RegisteredUserController extends Controller
             'phone' => ['nullable', 'string', 'max:15'],  
             'address' => ['nullable', 'string', 'max:255'],  
             'role' => ['nullable', 'string', 'max:50'],  
-            'preferences' => ['nullable', 'string'],  
-            'allergies' => ['nullable', 'string'], 
+            // 'preferences' => ['nullable', 'string'],  
+            // 'allergies' => ['nullable', 'string'], 
         ]);
         $role = $request->role ?? 'user';
 

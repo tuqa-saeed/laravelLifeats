@@ -15,7 +15,14 @@ class UserSubscription extends Model
         'start_date',
         'end_date',
         'status',
+
+        // ✅ Stripe fields
+        'stripe_id',
+        'stripe_product',
+        'stripe_price',
+        'quantity',
     ];
+
 
     // Relationships
 

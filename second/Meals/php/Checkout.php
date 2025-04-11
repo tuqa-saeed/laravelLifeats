@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Meal Plan</title>
     <link rel="stylesheet" href="../css/checkout.css">
+    <script src="https://js.stripe.com/v3/"></script>
 
     <!-- Load Modal First -->
     <?php include '../../assets/modal.php'; ?>
@@ -15,7 +16,6 @@
             inset: 0;
             z-index: 1050;
             display: none;
-            /* Default hidden */
             justify-content: center;
             align-items: center;
             pointer-events: all;
@@ -65,6 +65,52 @@
 
         .text-orange {
             color: #ff691c !important;
+        }
+
+        /* Stripe Card Element Styling */
+        .card-container {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        #card-element {
+            padding: 10px 0;
+        }
+
+        #card-errors {
+            color: #dc3545;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .payment-option.selected {
+            border-color: #ff691c;
+            background-color: rgba(255, 105, 28, 0.05);
+        }
+
+        .payment-radio {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #ddd;
+            margin-left: auto;
+        }
+
+        .payment-option.selected .payment-radio {
+            border-color: #ff691c;
+            background-color: #ff691c;
         }
 
         @keyframes spinner-rotate {
@@ -121,10 +167,16 @@
 
             <div class="section">
                 <div class="section-title">Payment</div>
-                <div class="payment-option">
+                <div class="payment-option selected" id="credit-card-option">
                     <div class="payment-icon">💳</div>
-                    <div class="payment-text">Add new card</div>
+                    <div class="payment-text">Credit Card</div>
                     <div class="payment-radio"></div>
+                </div>
+
+                <!-- Stripe Card Element -->
+                <div class="card-container">
+                    <div id="card-element"></div>
+                    <div id="card-errors" role="alert"></div>
                 </div>
 
                 <div class="credits-row">
@@ -204,8 +256,26 @@
     require_once __DIR__ . "/../../Homepage/includes/footer.php";
     ?>
     <script>
+        // Initialize Stripe
+        const stripe = Stripe('pk_test_51RCHdtP6U0BieMqErDqEgOGZ9g67eUENpyYCvbscH8ekZBijy7MygIXiMubZQk4E8FyPspPZJSDjj84pBCID8nPV00LQ8s53dJ'); // Your publishable key
+        const elements = stripe.elements();
+        const cardElement = elements.create('card');
+
+        // Mount the card element
+        cardElement.mount('#card-element');
+
+        // Handle real-time validation errors on the card element
+        cardElement.addEventListener('change', function(event) {
+            const displayError = document.getElementById('card-errors');
+            if (event.error) {
+                displayError.textContent = event.error.message;
+            } else {
+                displayError.textContent = '';
+            }
+        });
+
         const spinnerOverlay = document.getElementById('spinner-overlay');
-        spinnerOverlay.style.display = 'none'; // Show spinner immediately
+
         // Helper to read cookie by name
         function getCookie(name) {
             const value = `; ${document.cookie}`;
@@ -244,50 +314,85 @@
             document.getElementById('planId').value = plan.id;
         }
 
-        // Handle subscription logic
-        async function submitSubscription(userId, planId) {
+        // Handle payment and subscription with Stripe
+        async function processPayment(userId, planId) {
             try {
-                const token = getCookie('token'); // from cookie
+                spinnerOverlay.style.display = 'block';
+                const token = getCookie('token');
 
                 if (!token) {
                     showModal("Error", 'Missing authentication token.');
+                    spinnerOverlay.style.display = 'none';
                     return;
                 }
-                spinnerOverlay.style.display = 'block'; // Show spinner immediately
 
+                // Create payment method with Stripe
+                const {
+                    paymentMethod,
+                    error
+                } = await stripe.createPaymentMethod({
+                    type: 'card',
+                    card: cardElement,
+                });
+
+                if (error) {
+                    showModal("Payment Error", error.message);
+                    spinnerOverlay.style.display = 'none';
+                    return;
+                }
+
+                // Send to backend using your existing storeWithAutoSchedule endpoint
                 const response = await fetch('http://127.0.0.1:8000/api/user-subscriptions/subscribe', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + token // ✅ This is the key line!
+                        'Authorization': 'Bearer ' + token
                     },
                     body: JSON.stringify({
                         user_id: userId,
-                        subscription_id: planId
+                        subscription_id: planId,
+                        payment_method: paymentMethod.id // Match your backend parameter name
                     })
                 });
 
                 const data = await response.json();
 
                 if (response.ok) {
-                    spinnerOverlay.style.display = 'none'; // Show spinner immediately
-                    showModal("Done!", `${data.message ||'Subscription successful and meals scheduled!'} `);
-
+                    showModal("Success!", `${data.message || 'Payment successful and meals scheduled!'}`);
                     console.log('Success:', data);
-                    // Optional redirect or UI update
-                } else {
-                    spinnerOverlay.style.display = 'none'; // Show spinner immediately
+                    // Optional: redirect to success page or dashboard
+                    // setTimeout(() => window.location.href = '../dashboard/', 3000);
+                } else if (response.status === 402) {
+                    // Handle payment that requires additional action (like 3D Secure)
+                    const {
+                        payment_intent
+                    } = data;
 
-                    showModal("Error", `${data.message || 'Subscription failed.'} `);
+                    // Use Stripe to handle additional authentication
+                    const {
+                        error: confirmError
+                    } = await stripe.confirmCardPayment(payment_intent);
+
+                    if (confirmError) {
+                        showModal("Payment Failed", confirmError.message);
+                    } else {
+                        showModal("Success!", "Payment confirmed successfully!");
+                        // Redirect to success page after confirmation
+                        // setTimeout(() => window.location.href = '../dashboard/', 3000);
+                    }
+                } else if (response.status === 409) {
+                    // Conflict - user already has an active subscription
+                    showModal("Subscription Exists", `${data.message}`);
+                } else {
+                    showModal("Error", `${data.message || 'Payment failed.'}`);
                     console.error('Error:', data);
                 }
             } catch (error) {
-                spinnerOverlay.style.display = 'none'; // Show spinner immediately
-                console.log('About to show modal');
-                console.log(typeof showModal, showModal);
-                showModal("Error", "An error occurred during subscription.");
+                showModal("Error", "An error occurred during payment processing.");
                 console.error('Request failed:', error);
+            } finally {
+                spinnerOverlay.style.display = 'none';
             }
         }
 
@@ -303,13 +408,11 @@
 
                 if (!plan || !plan.id || !userCookie) {
                     showModal("Error", 'Missing user or plan data.');
-
-
                     return;
                 }
 
                 const user = JSON.parse(userCookie);
-                submitSubscription(user.id, plan.id);
+                processPayment(user.id, plan.id);
             });
 
             // Optional time option behavior
@@ -327,7 +430,6 @@
 
     <!-- Your global modal script -->
     <script src="../../assets/global-modal.js"></script>
-
 
 </body>
 

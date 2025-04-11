@@ -14,6 +14,11 @@ return [
     |
     */
 
+    'stripe' => [
+        'model' => App\Models\User::class,
+        'key' => env('STRIPE_KEY'),
+        'secret' => env('STRIPE_SECRET'),
+    ],
     'postmark' => [
         'token' => env('POSTMARK_TOKEN'),
     ],
