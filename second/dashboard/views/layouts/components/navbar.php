@@ -35,13 +35,13 @@
           aria-expanded="false">
           <div class="avatar-sm">
             <img
-              src=""
+              src="https://res.cloudinary.com/dukphrfdb/image/upload/v1744378438/logo3_m0cabj.ico"
               alt="..."
               class="avatar-img rounded-circle" />
           </div>
           <span class="profile-username">
             <span class="op-7">Hi,</span>
-            <span class="fw-bold">Adminssss</span>
+            <span class="fw-bold">Admin</span>
           </span>
         </a>
         <ul class="dropdown-menu dropdown-user animated fadeIn">

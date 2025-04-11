@@ -15,7 +15,6 @@ use Laravel\Cashier\Exceptions\IncompletePayment;
 
 class UserSubscriptionController extends Controller
 {
-    
     public function storeWithAutoSchedule(Request $request)
     {
         $request->validate([
@@ -64,6 +63,8 @@ class UserSubscriptionController extends Controller
             // ✅ Save in your custom user_subscriptions table
             $userSubscription = UserSubscription::create([
                 'user_id' => $user->id,
+                // 'user' => $user,
+                // 'subscription' => $subscriptionPlan,
                 'subscription_id' => $subscriptionPlan->id,
                 'start_date' => now()->toDateString(),
                 'end_date' => now()->addDays($subscriptionPlan->duration_days)->toDateString(),
@@ -105,9 +106,12 @@ class UserSubscriptionController extends Controller
 
             return response()->json([
                 'message' => 'Subscription created, payment successful, meals scheduled!',
-                'data' => $userSubscription
+                'data' => [
+                    'user' => $user,
+                    'subscription_plan' => $subscriptionPlan,
+                    'user_subscription' => $userSubscription,
+                ]
             ], 201);
-
         } catch (IncompletePayment $exception) {
             return response()->json([
                 'message' => 'Payment requires additional actions.',

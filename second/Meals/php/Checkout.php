@@ -42,10 +42,11 @@
             top: 50%;
         }
 
-        .spinner-border {
+        .my-spinner-border {
             width: 80px;
             height: 80px;
             border-width: 6px;
+            border-style: solid;
             border-color: #ff691c transparent #ff691c transparent;
             animation: spinner-rotate 1s linear infinite;
             border-radius: 50%;
@@ -61,6 +62,16 @@
             background-color: #fff;
             pointer-events: none;
             object-fit: cover;
+        }
+
+        @keyframes spinner-rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .text-orange {
@@ -112,21 +123,18 @@
             border-color: #ff691c;
             background-color: #ff691c;
         }
-
-        @keyframes spinner-rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
     </style>
 
 </head>
 
 <body class="p-0 m-0">
+    <div id="spinner-overlay">
+        <div class="spinner-backdrop"></div>
+        <div class="spinner-wrapper">
+            <div class="my-spinner-border text-orange" role="status"></div>
+            <img src="../../dashboard/views/layouts/components/logo3.ico" alt="Center Icon" class="spinner-icon" />
+        </div>
+    </div>
     <?php
     require_once __DIR__ . "/../../Homepage/includes/navbar.php";
     ?>
@@ -244,13 +252,7 @@
             </form>
         </div>
     </div>
-    <div id="spinner-overlay">
-        <div class="spinner-backdrop"></div>
-        <div class="spinner-wrapper">
-            <div class="spinner-border text-orange" role="status"></div>
-            <img src="../../dashboard/views/layouts/components/logo3.ico" alt="Center Icon" class="spinner-icon" />
-        </div>
-    </div>
+
 
     <?php
     require_once __DIR__ . "/../../Homepage/includes/footer.php";
@@ -361,8 +363,14 @@
                 if (response.ok) {
                     showModal("Success!", `${data.message || 'Payment successful and meals scheduled!'}`);
                     console.log('Success:', data);
+                    // Save subscription data in localStorage
+                    localStorage.setItem('subscriptionSuccessData', JSON.stringify(data.data));
+
+                    setTimeout(() => {
+                        window.location.href = '/Meals/php/SuccessPage.php';
+                    }, 3000);
                     // Optional: redirect to success page or dashboard
-                    // setTimeout(() => window.location.href = '../dashboard/', 3000);
+                    // window.location.href = '../dashboard/', 3000);
                 } else if (response.status === 402) {
                     // Handle payment that requires additional action (like 3D Secure)
                     const {
@@ -379,11 +387,12 @@
                     } else {
                         showModal("Success!", "Payment confirmed successfully!");
                         // Redirect to success page after confirmation
-                        // setTimeout(() => window.location.href = '../dashboard/', 3000);
+
+
                     }
                 } else if (response.status === 409) {
                     // Conflict - user already has an active subscription
-                    showModal("Subscription Exists", `${data.message}`);
+                    showModal("Subscription Exists", `${data.message}`)
                 } else {
                     showModal("Error", `${data.message || 'Payment failed.'}`);
                     console.error('Error:', data);
@@ -392,7 +401,7 @@
                 showModal("Error", "An error occurred during payment processing.");
                 console.error('Request failed:', error);
             } finally {
-                spinnerOverlay.style.display = 'none';
+                spinnerOverlay.style.display = 'none'
             }
         }
 

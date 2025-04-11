@@ -42,6 +42,7 @@ class SubscriptionController extends Controller
         // Create user subscription
         $userSubscription = UserSubscription::create([
             'user_id' => 2,
+            'subscription' => $subscription,
             'subscription_id' => $subscription->id,
             'start_date' => now(),
             'end_date' => now()->addDays($subscription->duration_days),
