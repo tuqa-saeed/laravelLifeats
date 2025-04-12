@@ -1,66 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+This project provides a personalized weekly meal system for each user based on their preferences and dietary habits.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Allows users to select daily meals through an intuitive control panel.
 
-## About Laravel
+### Each team member worked independently on either the frontend or backend repo, and then both parts were integrated together during deployment or in a unified development environment.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Offers a “meal lock” feature to finalize meal selections after confirmation.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Manages user subscriptions with flexible plan durations.
 
-## Learning Laravel
+Includes a comprehensive product management system (e.g., supplements or ready-to-eat meals).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+👤 2. User Registration & Authentication
+📁 Controllers: RegisteredUserController, AuthenticatedSessionController
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Users register their name, email, password, phone number, preferences, and sensitivities.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Role-based access control (user/admin).
 
-## Laravel Sponsors
+Full token protection for security, with token storage handled in cookies by Sanctum
+🍱 3. Meal & Category Management
+📁 Controllers: MealController, MealCategoryController
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Displays all available meals and categories (e.g., breakfast, lunch, dinner).
 
-### Premium Partners
+Meals can be filtered by category or date.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+Allows CRUD operations for meal management.
 
-## Contributing
+Uses the belongsTo relationship between meals and categories.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+📆 4. Meal Scheduling
+📁 Controller: MealScheduleController
 
-## Code of Conduct
+Each user has a meal schedule tied to their subscription.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The schedule includes dates and meals arranged by day.
 
-## Security Vulnerabilities
+✅ 5. Meal Selection & Confirmation
+📁 Controller: MealSelectionController
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Users select meals for each day and category.
 
-## License
+Prevents duplicate meals within the same category.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Final confirmation locks the day’s meal selection.
+
+Allows flexibility to modify choices before locking.
+
+📦 6. Product Management (Supplements, Juices, etc.)
+📁 Controller: ProductsController
+
+Full CRUD functionality for products.
+
+Each product includes name, description, and price.
+
+Ready for sale or inclusion within subscription plans.
+
+💳 7. Subscriptions & Plan Duration
+📁 Controllers: SubscriptionController, UserSubscriptionController
+
+Users select a subscription plan: weekly, monthly, etc.
+
+Creates a subscription with start and end dates.
+
+Prevents duplicate subscriptions if a valid subscription is active.
+
+👥 8. User Interface
+📁 Controller: UserController
+
+View and edit profile.
+
+Update preferences and sensitivities.
+
+Only the user has access to their profile.
+
+📌 Key Features
+Full meal customization support.
+
+Locks meal selection after confirmation.
+
+Automatically generates meal schedule upon subscription.
+
+Secures orders and validates data.
+
+Clear and modular RESTful API.
+
+🌐 Tech Stack
+Back-End Framework: Laravel 10
+
+Database: MySQL
+
+API Testing: Postman
+
+Design Pattern: MVC
+
+APIs: RESTful
+
+Authentication & Middleware
+
+Validation & Error Handling
