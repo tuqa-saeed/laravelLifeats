@@ -116,19 +116,9 @@
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Blog</a></li>
                     <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Contact</a></li>
                 </ul>
             </div>
             
-            <div class="footer-section">
-                <h3>About</h3>
-                <ul>
-                    <li><a href="#">Our Story</a></li>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                </ul>
-            </div>
             
             <div class="footer-section newsletter">
                 <h3>Subscribe to Our Newsletter</h3>
