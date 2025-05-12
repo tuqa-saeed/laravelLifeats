@@ -363,12 +363,7 @@
           </div>
 
           <!-- Contact CTA -->
-          <div class="text-center mt-5">
-            <a href="#" class="btn px-4 py-2 fw-bold"
-              style="background-color: #ff691c; color: white; border: none; border-radius: 4px;">
-              <i class="fas fa-envelope me-2"></i> Contact Us
-            </a>
-          </div>
+          
         </div>
       </div>
     </div>
